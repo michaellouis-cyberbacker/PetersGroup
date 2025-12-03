@@ -2,16 +2,6 @@
 <html lang="en">
 <head>
 
-<script>
-  // Keep the same redirect behavior, but prevent loops on mobile.html
-  document.addEventListener("DOMContentLoaded", function() {
-    const onMobilePage = window.location.pathname.toLowerCase().includes("mobile.html");
-    if (!onMobilePage && window.innerWidth < 768) {
-      window.location.href = "mobile.html";
-    }
-  });
-</script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Peters Group Real Estate - Mobile</title>
