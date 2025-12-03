@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.innerWidth < 768) {
+      window.location.href = "mobile.html";
+    }
+  });
+</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ashley Peters – Reviews</title>
+  <title>Peters Group Real Estate</title>
+
+  <!-- Ashley fonts (needed for Ashley body styles) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -19,16 +31,16 @@
       color: var(--navy);
     }
 
-    /* HEADER */
+    /* HEADER — NOW LEFT-ALIGNED */
     .header {
       background-color: var(--navy);
       color: var(--white);
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;      /* LEFT ALIGN */
       align-items: center;
-      padding: 15px;
-      flex-direction: column;
-      text-align: center;
+      padding: 15px 40px;
+      gap: 40px;                         /* SPACE BETWEEN LOGO AND NAV */
+      flex-wrap: nowrap;
     }
 
     .logo img {
@@ -39,12 +51,11 @@
     /* NAVIGATION */
     .nav ul {
       list-style: none;
-      margin: 10px 0 0 0;
+      margin: 0;
       padding: 0;
       display: flex;
       gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
+      align-items: center;
     }
 
     .nav li {
@@ -56,6 +67,9 @@
       text-decoration: none;
       font-weight: bold;
       padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: color 0.3s;
     }
 
@@ -75,32 +89,85 @@
       padding: 10px 0;
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
       z-index: 999;
     }
 
     .dropdown-menu a {
       padding: 10px 20px;
+      display: block;
       white-space: nowrap;
     }
 
-    .dropdown.open .dropdown-menu {
+    .dropdown-menu a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: var(--gold);
+    }
+
+    /* SHOW DROPDOWN Desktop */
+    .nav li:hover .dropdown-menu {
       display: flex;
+      opacity: 1;
+      transform: translateY(0px);
+      pointer-events: auto;
     }
 
-    /* MAIN CONTENT */
-    .content-wrapper {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      min-height: 70vh;
+    /* MOBILE CLICK SUPPORT */
+    .nav li.open .dropdown-menu {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0px);
+      pointer-events: auto;
     }
 
-    iframe {
+    /* SLIDESHOW (kept, though unused on this page) */
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .mySlides {
+      display: none;
+    }
+
+    .mySlides img {
       width: 100%;
-      height: 900px;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      height: 80vh;
+      object-fit: cover;
+    }
+
+    .fade {
+      animation: fadeEffect 1.5s;
+    }
+
+    @keyframes fadeEffect {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    .dot-container {
+      text-align: center;
+      padding: 10px;
+      background: var(--navy);
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active {
+      background-color: var(--gold);
     }
 
     /* FOOTER */
@@ -109,28 +176,303 @@
       color: var(--white);
       text-align: center;
       padding: 15px;
-      margin-top: 40px;
     }
+
+    /* ------------------------------------- */
+    /* ASHLEY PAGE SPECIFIC STYLES (SCOPED) */
+    /* ------------------------------------- */
+
+    :root {
+      --beige: #c19a6b;
+      --beige-soft: #f1e8dc;
+      --ink: #000;
+      --text: #444;
+    }
+
+    .ashley-page {
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      background: #fff;
+      position: relative;
+      min-height: calc(100vh - 120px); /* allow for header/footer */
+    }
+
+    .ashley-page::after {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 48%;
+      background: radial-gradient(
+        60% 60% at 50% 100%,
+        rgba(193,154,107,0.60) 0%,
+        rgba(193,154,107,0.30) 35%,
+        rgba(193,154,107,0) 70%
+      );
+      filter: blur(42px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .ashley-page .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .ashley-page img.profile {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--beige);
+      margin-bottom: 15px;
+    }
+
+    .ashley-page h1 {
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--ink);
+      margin: 0 0 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ashley-page .highlight {
+      font-weight: bold;
+      color: #c19a6b;
+    }
+
+    .ashley-page p.description {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.55;
+      margin: 0 auto 10px;
+    }
+
+    .ashley-page .reviews {
+      background: #f9f7f5;
+      border-left: 4px solid #c19a6b;
+      padding: 15px;
+      margin-top: 25px;
+      text-align: left;
+    }
+
+    .ashley-page .reviews p {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .ashley-page .reviews strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #000;
+    }
+
+    .ashley-page .review-author {
+      font-style: italic;
+      color: #555;
+    }
+
+    .ashley-page .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 12px auto;
+      padding: 16px;
+      width: 90%;
+      max-width: 400px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 500;
+      background-color: var(--beige);
+      color: #000;
+      box-sizing: border-box;
+      transition: transform .1s ease-in-out, opacity .2s;
+    }
+
+    .ashley-page .btn img {
+      height: 24px;
+      width: auto;
+    }
+
+    .ashley-page .btn:hover {
+      opacity: .85;
+      transform: scale(1.02);
+    }
+
+    .ashley-page .btn.black-btn {
+      background: #000;
+      padding: 12px;
+    }
+
+    .ashley-page .btn.black-btn img {
+      height: 30px;
+    }
+
+    .ashley-page .btn.compass {
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+      }
+      50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 18px rgba(0,0,0,.28);
+      }
+    }
+
+    .ashley-page .instructions {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .ashley-page .incentive {
+      margin: 12px auto 6px;
+      padding: 12px 14px;
+      max-width: 520px;
+      background: linear-gradient(90deg, #fff7ec, #f5e7d4);
+      border: 1px solid #e0c9a8;
+      border-radius: 10px;
+      color: #5a3e2b;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ashley-page .closing-line {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: var(--text);
+      font-style: italic;
+      text-align: center;
+    }
+
+    .ashley-page .contact-section {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .ashley-page .contact-section a {
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ashley-page .contact-section img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ashley-page .ray-homes-icon {
+      display: inline-block;
+      background: rgba(193,154,107,0.65);
+      padding: 6px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    .ashley-page .ray-homes-icon img {
+      height: 24px;
+      width: auto;
+      display: block;
+    }
+
+    /* Sticky bar for mobile */
+    .sticky-bar {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .ashley-page h1 {
+        font-size: 1.7rem;
+      }
+
+      .ashley-page p.description {
+        font-size: .95rem;
+      }
+
+      .ashley-page .btn {
+        font-size: 1rem;
+        padding: 14px;
+        width: 95%;
+      }
+
+      .ashley-page .btn img {
+        height: 22px;
+      }
+
+      .sticky-bar {
+        display: flex;
+        position: fixed;
+        bottom: -88px;
+        left: 0;
+        width: 100%;
+        background: rgba(255,255,255,.96);
+        border-top: 1px solid #d8d8d8;
+        justify-content: space-around;
+        padding: 8px 0;
+        z-index: 999;
+        transition: bottom .3s ease-in-out;
+        backdrop-filter: saturate(1.3) blur(6px);
+      }
+
+      .sticky-bar.show {
+        bottom: 0;
+      }
+
+      .sticky-bar a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #000;
+        font-size: .82rem;
+      }
+
+      .sticky-bar img {
+        height: 28px;
+        margin-bottom: 4px;
+      }
+    }
+
   </style>
-
 </head>
-<body>
 
+<body>
   <!-- HEADER -->
   <header class="header">
     <div class="logo">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG" />
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG" alt="Peters Group Logo" />
     </div>
 
     <nav class="nav">
       <ul>
+        <li><a href="#home">Home</a></li>
 
-        <li><a href="index.html">Home</a></li>
-
+        <!-- RENTALS DROPDOWN -->
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
+
           <div class="dropdown-menu">
-            <a href="RentRedi.html">RentRedi</a>
+            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
+               target="_blank"
+               rel="noopener noreferrer">
+               RentRedi
+            </a>
             <a href="https://www.padsplit.com/rooms-for-rent/listing/14427?referralCode=095A4F2E&ref_source=listing&ref_device=desktop&ref_role=host"
                target="_blank"
                rel="noopener noreferrer">
@@ -139,38 +481,212 @@
           </div>
         </li>
 
-        <li><a href="About.html">About</a></li>
-        <li><a href="Tours.html">House Tours</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tours">House Tours</a></li>
 
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
+
           <div class="dropdown-menu">
             <a href="Adam.html">Adam Peters</a>
             <a href="Ashley.html">Ashley Peters</a>
           </div>
         </li>
-
       </ul>
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <section class="content-wrapper">
-    <iframe src="https://apclientreview.netlify.app/" title="Ashley Peters Client Reviews"></iframe>
-  </section>
+  <!-- ASHLEY BODY (replaces slideshow) -->
+  <main class="ashley-page">
+    <div class="container">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Ashley%20Peters.webp" alt="Ashley Peters" class="profile">
+      <h1>Ashley Peters</h1>
+
+      <p class="description">
+        As part of Ashley’s <span class="highlight">Five-Star Client Review Program</span>, we’d love your help in sharing your experience. In return, you’ll receive a <span class="highlight">$75 gift card</span> of your choice:
+      </p>
+
+      <!-- Gift Card Options -->
+      <table align="center" style="margin:auto;">
+        <tr>
+          <td style="padding:10px;">
+            <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Amazon.png" alt="Amazon" width="80">
+          </td>
+          <td style="padding:10px;">
+            <img src=" https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/HomeDepot.png" alt="Home Depot" width="80">
+          </td>
+          <td style="padding:10px;">
+            <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Starbucks.png" alt="Starbucks" width="80">
+          </td>
+          <td style="padding:10px;">
+            <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/LongHorn.png" alt="LongHorn" width="80">
+          </td>
+        </tr>
+      </table>
+
+      <a href="https://zillow.com/reviews/write/?s=X1-ZU14gyf3xbeird5_1pt0h" class="btn">
+        <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Zillow.png" alt="Zillow Logo">
+        Leave a Zillow Review
+      </a>
+
+      <a href="https://share.google/eHXIxe1mzX4HUGD5H" class="btn">
+        <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Google.png" alt="Google Logo">
+        Leave a Google Review
+      </a>
+
+      <a href="https://www.facebook.com/ashleypetersrealestatekc/reviews" class="btn">
+        <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Facebook.png" alt="Facebook Logo">
+        Leave a Facebook Review
+      </a>
+
+      <!-- Collapsible Instructions Section -->
+      <section style="margin:30px auto; max-width:700px; font-family: Inter, sans-serif; text-align:center;">
+
+        <details style="display:inline-block; text-align:left;">
+          <summary style="cursor:pointer; font-size:0.95rem; color:#444; background:#f2f2f2; border:1px solid #ddd; border-radius:5px; padding:6px 12px; display:inline-block;">
+            📋 Instructions
+          </summary>
+
+          <div style="margin-top:12px; padding:15px; background:#fdfdfd; border:1px solid #eee; border-radius:8px; line-height:1.6; font-size:0.95rem;">
+            <p><strong>Zillow:</strong><br>
+            • Log in to your Zillow account.<br>
+            • Click the Zillow review button above.<br>
+            • Write and submit your review.</p>
+
+            <p><strong>Google:</strong><br>
+            • Click the Google review button above to open Ashley’s Compass Realty Group profile.<br>
+            • Select “Write a Review.”<br>
+            • Share your experience and submit.</p>
+
+            <p><strong>Facebook:</strong><br>
+            • Click the Facebook review button above to go to the Reviews tab.<br>
+            • Select “Yes” when asked if you recommend Ashley.<br>
+            • Write your review and submit.</p>
+
+            <p style="margin-top:15px; font-weight:bold; text-align:center; font-size:1rem;">
+              💵 Once finished, reply to the email you received and let us know which $75 gift card you’d like:
+              Amazon, Home Depot, Starbucks, or LongHorn Steakhouse.
+            </p>
+          </div>
+        </details>
+
+      </section>
+
+      <p class="instructions"><strong>Please write one review and copy it to all three platforms above.</strong></p>
+
+      <div class="reviews" id="reviews">
+        <strong>Here are a few reviews from previous clients to inspire yours:</strong>
+
+        <p>“We can’t say enough good things about our realtor, Ashley — she truly went above and beyond for our family throughout the entire home buying journey. From the very beginning, Ashley took the time to really understand what we were looking for in a home... If you’re buying or selling a home, do yourself a favor and call Ashley.”<br>
+        <span class="review-author">— Alivia Q.</span></p>
+
+        <p>“Ashley did an outstanding job on our home purchase this year. She was very accommodating to our work schedule whenever we had to tour a home... We appreciate all of her hard work and would surely recommend her to home buyers in the market.”<br>
+        <span class="review-author">— Priyanka S.</span></p>
+
+        <p>“Ashley Peters is everything you need and more from a realtor. She is very attentive, passionate, knowledgeable, and cares very much for her clients... I am so thankful we had her for our realtor and now a lifelong friend.”<br>
+        <span class="review-author">— Grant L.</span></p>
+      </div>
+
+      <p class="incentive">Complete your reviews and receive <strong>$75 in gift cards</strong> of your choice 💵 — our way of saying thank you for your honest feedback.</p>
+
+      <p class="closing-line"><strong>It has been a blessing to represent you, and I truly appreciate you trusting me to be part of your journey.</strong></p>
+
+      <!-- Compass button -->
+      <a href="https://www.compass.com/agents/ashley-reters/" class="btn black-btn compass" aria-label="Visit Ashley Peters on Compass">
+        <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Compass%202.png" alt="Compass Logo">
+      </a>
+
+      <!-- Contact info -->
+      <div class="contact-section">
+        <a href="mailto:ashleypeters@compass.com">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email Icon">
+          ashleypeters@compass.com
+        </a>
+      </div>
+
+      <!-- Ray Homes small icon -->
+      <div>
+        <a href="https://rayhomeskc.com/" class="ray-homes-icon" aria-label="Visit Ray Homes">
+          <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Ray%20Homes.png" alt="Ray Homes Logo">
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sticky bar for mobile -->
+  <div class="sticky-bar" id="sticky-bar">
+    <a href="https://zillow.com/reviews/write/?s=X1-ZU14gyf3xbeird5_1pt0h">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Zillow.png" alt="Zillow">Zillow
+    </a>
+    <a href="https://share.google/eHXIxe1mzX4HUGD5H">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Google.png" alt="Google">Google
+    </a>
+    <a href="https://www.facebook.com/share/177efWy5gB/?mibextid=wwXIfr">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/AshleyPeters/refs/heads/Images/Facebook.png" alt="Facebook">Facebook
+    </a>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    © 2025 Peters Group Real Estate
+    <p>&copy; 2025 Peters Group Real Estate. All rights reserved.</p>
   </footer>
 
-  <!-- DROPDOWN JS -->
+  <!-- JAVASCRIPT (Slideshow + Dropdown + Ashley Sticky Bar) -->
   <script>
+    /* MULTIPLE DROPDOWNS */
     document.querySelectorAll(".dropdown-toggle").forEach(tog => {
-      tog.addEventListener("click", () => {
+      tog.addEventListener("click", (e) => {
+        e.preventDefault();
         tog.parentElement.classList.toggle("open");
       });
     });
+
+    /* SLIDESHOW (kept from index, not used on this page) */
+    let slideIndex = 0;
+    function showSlides() {
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("dot");
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) slideIndex = 1;
+
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      if (slides.length > 0) {
+        slides[slideIndex - 1].style.display = "block";
+      }
+      if (dots.length > 0) {
+        dots[slideIndex - 1].className += " active";
+      }
+
+      if (slides.length > 0) {
+        setTimeout(showSlides, 5000);
+      }
+    }
+    showSlides();
+
+    /* STICKY BAR FOR ASHLEY PAGE */
+    const reviewsSection = document.getElementById('reviews');
+    const stickyBar = document.getElementById('sticky-bar');
+
+    function toggleSticky() {
+      if (!reviewsSection || !stickyBar) return;
+      const rect = reviewsSection.getBoundingClientRect();
+      if (rect.top < -50) {
+        stickyBar.classList.add('show');
+      } else {
+        stickyBar.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('scroll', toggleSticky, { passive: true });
+    document.addEventListener('DOMContentLoaded', toggleSticky);
   </script>
 
 </body>
