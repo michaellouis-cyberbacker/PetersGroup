@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script>
+  // Keep the same redirect behavior, but prevent loops on mobile.html
+  document.addEventListener("DOMContentLoaded", function() {
+    const onMobilePage = window.location.pathname.toLowerCase().includes("mobile.html");
+    if (!onMobilePage && window.innerWidth < 768) {
+      window.location.href = "mobile.html";
+    }
+  });
+</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Peters Group Mobile</title>
+  <title>Peters Group Real Estate - Mobile</title>
 
   <style>
     :root {
@@ -17,31 +28,34 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--white);
       color: var(--navy);
-      overflow-x: hidden;
     }
 
-    /* HEADER */
+    /* HEADER — LEFT-ALIGNED */
     .header {
       background-color: var(--navy);
       color: var(--white);
-      text-align: center;
-      padding: 15px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 12px 16px;   /* slightly tighter for mobile */
+      gap: 20px;
+      flex-wrap: nowrap;
     }
 
     .logo img {
-      height: 60px;
+      height: 50px;         /* slightly smaller logo for mobile */
       width: auto;
     }
 
-    /* NAVIGATION (non-collapsible, mobile friendly) */
+    /* NAVIGATION */
     .nav ul {
       list-style: none;
+      margin: 0;
       padding: 0;
-      margin: 10px 0 0 0;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;      /* allow wrapping on small widths */
     }
 
     .nav li {
@@ -52,41 +66,70 @@
       color: var(--white);
       text-decoration: none;
       font-weight: bold;
-      padding: 6px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.3s;
     }
 
     .nav a:hover {
       color: var(--gold);
     }
 
-    /* DROPDOWNS (tap-to-open) */
+    /* DROPDOWN MENU */
     .dropdown-menu {
       display: none;
       position: absolute;
+      left: 0;
       top: 100%;
       background-color: var(--navy);
-      min-width: 150px;
+      min-width: 180px;
       flex-direction: column;
+      padding: 10px 0;
       border-radius: 6px;
-      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 999;
     }
 
     .dropdown-menu a {
-      padding: 10px;
-      font-size: 0.9rem;
+      padding: 10px 20px;
+      display: block;
+      white-space: nowrap;
     }
 
-    .dropdown.open .dropdown-menu {
+    .dropdown-menu a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: var(--gold);
+    }
+
+    /* SHOW DROPDOWN Desktop / tap */
+    .nav li:hover .dropdown-menu {
       display: flex;
+      opacity: 1;
+      transform: translateY(0px);
+      pointer-events: auto;
     }
 
-    /* SLIDESHOW */
+    /* MOBILE CLICK SUPPORT */
+    .nav li.open .dropdown-menu {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0px);
+      pointer-events: auto;
+    }
+
+    /* SLIDESHOW — MOBILE-SIZED */
     .slideshow-container {
       position: relative;
-      width: 100%;
+      max-width: 100%;
+      margin: auto;
       overflow: hidden;
-      margin-bottom: 15px;
     }
 
     .mySlides {
@@ -95,7 +138,7 @@
 
     .mySlides img {
       width: 100%;
-      height: 45vh;
+      height: 55vh;          /* smaller than 80vh for mobile */
       object-fit: cover;
     }
 
@@ -110,17 +153,18 @@
 
     .dot-container {
       text-align: center;
-      background-color: var(--navy);
-      padding: 10px;
+      padding: 8px;
+      background: var(--navy);
     }
 
     .dot {
       height: 10px;
       width: 10px;
+      margin: 0 3px;
       background-color: #bbb;
       border-radius: 50%;
       display: inline-block;
-      margin: 0 4px;
+      transition: background-color 0.6s ease;
     }
 
     .active {
@@ -132,15 +176,20 @@
       background-color: var(--navy);
       color: var(--white);
       text-align: center;
-      padding: 15px;
-      margin-top: 25px;
-      font-size: 0.9rem;
+      padding: 12px;
+      font-size: 0.85rem;
+    }
+
+    /* Extra safety for very short screens */
+    @media (max-height: 600px) {
+      .mySlides img {
+        height: 45vh;
+      }
     }
   </style>
 </head>
 
 <body>
-
   <!-- HEADER -->
   <header class="header">
     <div class="logo">
@@ -149,13 +198,18 @@
 
     <nav class="nav">
       <ul>
+        <li><a href="#home">Home</a></li>
 
-        <li><a href="index.html">Home</a></li>
-
+        <!-- RENTALS DROPDOWN -->
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
+
           <div class="dropdown-menu">
-            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1">RentRedi</a>
+            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
+               target="_blank"
+               rel="noopener noreferrer">
+               RentRedi
+            </a>
             <a href="https://www.padsplit.com/rooms-for-rent/listing/14427?referralCode=095A4F2E&ref_source=listing&ref_device=desktop&ref_role=host"
                target="_blank"
                rel="noopener noreferrer">
@@ -164,40 +218,38 @@
           </div>
         </li>
 
-        <li><a href="About.html">About</a></li>
-        <li><a href="Tours.html">House Tours</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tours">House Tours</a></li>
 
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
+
           <div class="dropdown-menu">
             <a href="Adam.html">Adam Peters</a>
             <a href="Ashley.html">Ashley Peters</a>
           </div>
         </li>
-
       </ul>
     </nav>
   </header>
 
-  <!-- SLIDESHOW -->
+  <!-- SLIDESHOW (same slides, resized for mobile) -->
   <div class="slideshow-container">
-
     <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/1.png" />
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/1.png" alt="Home 1" />
     </div>
 
     <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" />
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" alt="Home 2" />
     </div>
 
     <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" />
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" alt="Home 3" />
     </div>
 
     <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" />
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" alt="Home 4" />
     </div>
-
   </div>
 
   <div class="dot-container">
@@ -207,39 +259,51 @@
     <span class="dot"></span>
   </div>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    © 2025 Peters Group Real Estate
+    <p>&copy; 2025 Peters Group Real Estate. All rights reserved.</p>
   </footer>
 
+  <!-- JAVASCRIPT (Slideshow + Dropdown) -->
   <script>
-    /* TAP-TO-OPEN DROPDOWNS */
+    /* MULTIPLE DROPDOWNS (tap support for mobile) */
     document.querySelectorAll(".dropdown-toggle").forEach(tog => {
-      tog.addEventListener("click", () => {
+      tog.addEventListener("click", (e) => {
+        e.preventDefault();
         tog.parentElement.classList.toggle("open");
       });
     });
 
-    /* SLIDESHOW SCRIPT */
+    /* SLIDESHOW */
     let slideIndex = 0;
-    function showSlides() {
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
+    showSlides();
 
-      for (let i = 0; i < slides.length; i++)
+    function showSlides() {
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("dot");
+
+      for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
+      }
 
       slideIndex++;
       if (slideIndex > slides.length) slideIndex = 1;
 
-      for (let i = 0; i < dots.length; i++)
+      for (let i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
+      }
 
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
+      if (slides.length > 0) {
+        slides[slideIndex - 1].style.display = "block";
+      }
+      if (dots.length > 0) {
+        dots[slideIndex - 1].className += " active";
+      }
 
-      setTimeout(showSlides, 4500);
+      if (slides.length > 0) {
+        setTimeout(showSlides, 5000);
+      }
     }
-    showSlides();
   </script>
 
 </body>
