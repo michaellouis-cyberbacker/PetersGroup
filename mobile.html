@@ -14,18 +14,22 @@
 
     body {
       margin: 0;
-      background: var(--white);
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--white);
       color: var(--navy);
     }
 
-    /* HEADER */
+    /* HEADER (scaled for mobile) */
     .header {
       background-color: var(--navy);
-      padding: 15px 20px;
+      color: var(--white);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      padding: 10px 15px;
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
     }
 
     .logo img {
@@ -33,83 +37,115 @@
       width: auto;
     }
 
-    /* HAMBURGER */
-    .hamburger {
-      width: 30px;
-      cursor: pointer;
-    }
-
-    .hamburger div {
-      width: 100%;
-      height: 4px;
-      background: var(--white);
-      margin: 5px 0;
-      border-radius: 2px;
-    }
-
-    /* MOBILE NAV MENU */
-    .nav {
-      background: var(--navy);
-      display: none;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .nav.open {
+    /* NAVIGATION */
+    .nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .nav li {
+      position: relative;
     }
 
     .nav a {
       color: var(--white);
-      padding: 15px 20px;
       text-decoration: none;
       font-weight: bold;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 5px;
+      font-size: 0.95em;
+      display: block;
+      transition: color 0.3s;
     }
 
     .nav a:hover {
-      background: rgba(255,255,255,0.1);
+      color: var(--gold);
     }
 
-    /* DROPDOWN STYLE */
+    /* MOBILE DROPDOWN (tap-to-open) */
     .dropdown-menu {
       display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background-color: var(--navy);
+      min-width: 150px;
       flex-direction: column;
-      background: #12263A;
+      padding: 8px 0;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 9999;
+    }
+
+    .dropdown-menu a {
+      padding: 10px 15px;
+      white-space: nowrap;
+      font-size: 0.9em;
     }
 
     .dropdown.open .dropdown-menu {
       display: flex;
     }
 
-    .dropdown-menu a {
-      padding-left: 40px;
+    /* SLIDESHOW (scaled for mobile) */
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      margin: auto;
+      overflow: hidden;
     }
 
-    /* HERO */
-    .hero {
-      padding: 40px 20px;
+    .mySlides {
+      display: none;
+    }
+
+    .mySlides img {
+      width: 100%;
+      height: 45vh;
+      object-fit: cover;
+    }
+
+    .fade {
+      animation: fadeEffect 1.5s;
+    }
+
+    @keyframes fadeEffect {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    .dot-container {
       text-align: center;
+      padding: 10px;
+      background: var(--navy);
     }
 
-    .hero h1 {
-      color: var(--navy);
-      font-size: 1.9em;
-      margin-bottom: 10px;
+    .dot {
+      height: 10px;
+      width: 10px;
+      margin: 0 4px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
     }
 
-    .hero p {
-      font-size: 1.1em;
-      color: #333;
+    .active {
+      background-color: var(--gold);
     }
 
     /* FOOTER */
     .footer {
-      background: var(--navy);
+      background-color: var(--navy);
       color: var(--white);
       text-align: center;
       padding: 15px;
-      margin-top: 40px;
+      margin-top: 30px;
+      font-size: 0.9em;
     }
   </style>
 </head>
@@ -122,68 +158,105 @@
       <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG" alt="">
     </div>
 
-    <div class="hamburger" id="mobileMenuBtn">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
+          <div class="dropdown-menu">
+            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1" target="_blank" rel="noopener noreferrer">RentRedi</a>
+            <a href="https://www.padsplit.com/rooms-for-rent/listing/14427?referralCode=095A4F2E&ref_source=listing&ref_device=desktop&ref_role=host" target="_blank" rel="noopener noreferrer">PadSplit</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">About</a>
+		  <div class="dropdown-menu">
+            <a href="About.html">About</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">House Tours</a>
+		  <div class="dropdown-menu">
+            <a href="Tours.html">House Tours</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
+		  <div class="dropdown-menu">
+            <a href="https://apclientreview.netlify.app/" target="_blank">Reviews</a>
+          </div>
+        </li>
+
+      </ul>
+    </nav>
   </header>
 
-  <!-- NAV -->
-  <nav class="nav" id="mobileNav">
-    <a href="index.html">Home</a>
-
-    <div class="dropdown">
-      <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
-      <div class="dropdown-menu">
-        <a href="RentRedi.html">RentRedi</a>
-        <a href="https://www.padsplit.com/rooms-for-rent/listing/14427?referralCode=095A4F2E&ref_source=listing&ref_device=desktop&ref_role=host"
-           target="_blank"
-           rel="noopener noreferrer">
-           PadSplit
-        </a>
-      </div>
+  <!-- SLIDESHOW -->
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/1.png" />
     </div>
 
-    <div class="dropdown">
-      <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
-      <div class="dropdown-menu">
-        <a href="Adam.html">Adam Peters</a>
-        <a href="Ashley.html">Ashley Peters</a>
-      </div>
+    <div class="mySlides fade">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" />
     </div>
 
-    <a href="About.html">About</a>
-    <a href="Tours.html">House Tours</a>
-  </nav>
+    <div class="mySlides fade">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" />
+    </div>
 
-  <!-- MOBILE HERO -->
-  <section class="hero">
-    <h1>Welcome to Peters Group</h1>
-    <p>Your trusted partner in real estate — now in a clean mobile format.</p>
-  </section>
+    <div class="mySlides fade">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" />
+    </div>
+  </div>
+
+  <div class="dot-container">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>&copy; 2025 Peters Group Real Estate. All Rights Reserved.</p>
+    © 2025 Peters Group Real Estate
   </footer>
 
   <script>
-    /* HAMBURGER MENU */
-    const mobileBtn = document.getElementById("mobileMenuBtn");
-    const mobileNav = document.getElementById("mobileNav");
-
-    mobileBtn.addEventListener("click", () => {
-      mobileNav.classList.toggle("open");
-    });
-
-    /* DROPDOWNS */
-    document.querySelectorAll(".dropdown").forEach(drop => {
-      const toggle = drop.querySelector(".dropdown-toggle");
-      toggle.addEventListener("click", () => {
-        drop.classList.toggle("open");
+    /* MOBILE DROPDOWN TAP */
+    document.querySelectorAll(".dropdown-toggle").forEach(tog => {
+      tog.addEventListener("click", () => {
+        tog.parentElement.classList.toggle("open");
       });
     });
+
+    /* SLIDESHOW */
+    let slideIndex = 0;
+    function showSlides() {
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("dot");
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) slideIndex = 1;
+
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+
+      setTimeout(showSlides, 4500);
+    }
+    showSlides();
   </script>
 
 </body>
