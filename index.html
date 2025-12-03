@@ -28,15 +28,16 @@
       color: var(--navy);
     }
 
-    /* HEADER */
+    /* HEADER — NOW LEFT-ALIGNED */
     .header {
       background-color: var(--navy);
       color: var(--white);
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;      /* LEFT ALIGN */
       align-items: center;
       padding: 15px 40px;
-      flex-wrap: wrap;
+      gap: 40px;                         /* SPACE BETWEEN LOGO AND NAV */
+      flex-wrap: nowrap;
     }
 
     .logo img {
@@ -119,11 +120,7 @@
       pointer-events: auto;
     }
 
-    .nav li.open > a .dropdown-arrow {
-      border-color: var(--gold);
-    }
-
-/* SLIDESHOW */
+    /* SLIDESHOW (unchanged) */
     .slideshow-container {
       position: relative;
       max-width: 100%;
@@ -212,6 +209,7 @@
 
         <li><a href="#about">About</a></li>
         <li><a href="#tours">House Tours</a></li>
+
      <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
 
@@ -255,16 +253,13 @@
     <p>&copy; 2025 Peters Group Real Estate. All rights reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT (Slideshow + Mobile Dropdown Toggle) -->
+  <!-- JAVASCRIPT (Slideshow + Dropdown) -->
   <script>
-    /* MOBILE DROPDOWN CLICK */
-    document.addEventListener("DOMContentLoaded", () => {
-      const dropdown = document.querySelector(".dropdown");
-      const toggle = dropdown.querySelector(".dropdown-toggle");
-
-      toggle.addEventListener("click", (e) => {
+    /* MULTIPLE DROPDOWNS */
+    document.querySelectorAll(".dropdown-toggle").forEach(tog => {
+      tog.addEventListener("click", (e) => {
         e.preventDefault();
-        dropdown.classList.toggle("open");
+        tog.parentElement.classList.toggle("open");
       });
     });
 
