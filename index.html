@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -10,6 +9,7 @@
   });
 </script>
 
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Peters Group Real Estate</title>
@@ -65,7 +65,6 @@
       padding: 8px 0;
       display: flex;
       align-items: center;
-      gap: 6px;
       transition: color 0.3s;
     }
 
@@ -119,55 +118,12 @@
       pointer-events: auto;
     }
 
-    .nav li.open > a .dropdown-arrow {
-      border-color: var(--gold);
-    }
-
-    /* SLIDESHOW */
-    .slideshow-container {
-      position: relative;
-      max-width: 100%;
-      margin: auto;
-      overflow: hidden;
-    }
-
-    .mySlides {
-      display: none;
-    }
-
-    .mySlides img {
-      width: 100%;
-      height: 80vh;
-      object-fit: cover;
-    }
-
-    .fade {
-      animation: fadeEffect 1.5s;
-    }
-
-    @keyframes fadeEffect {
-      from { opacity: 0.4; }
-      to { opacity: 1; }
-    }
-
-    .dot-container {
-      text-align: center;
-      padding: 10px;
-      background: var(--navy);
-    }
-
-    .dot {
-      height: 12px;
-      width: 12px;
-      margin: 0 5px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-
-    .active {
-      background-color: var(--gold);
+    /* PAGE CONTENT */
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      min-height: 60vh;
     }
 
     /* FOOTER */
@@ -176,6 +132,7 @@
       color: var(--white);
       text-align: center;
       padding: 15px;
+      margin-top: 40px;
     }
 
   </style>
@@ -190,105 +147,61 @@
 
     <nav class="nav">
       <ul>
-        <li><a href="#home">Home</a></li>
+        <li><a href="index.html">Home</a></li>
 
         <!-- RENTALS DROPDOWN -->
-<li class="dropdown">
-  <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
 
-  <div class="dropdown-menu">
-    <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
-		target="_blank"
-       rel="noopener noreferrer">
-	   RentRedi
-	   </a>
-    <a href="https://www.padsplit.com/rooms-for-rent/listing/14427?referralCode=095A4F2E&ref_source=listing&ref_device=desktop&ref_role=host"
-       target="_blank"
-       rel="noopener noreferrer">
-       PadSplit
-    </a>
-  </div>
-</li>
+          <div class="dropdown-menu">
+            <a href="RentRedi.html">RentRedi</a>
+            <a href="https://www.padsplit.com/rooms-for-rent/listing/14427?referralCode=095A4F2E&ref_source=listing&ref_device=desktop&ref_role=host"
+               target="_blank"
+               rel="noopener noreferrer">
+               PadSplit
+            </a>
+          </div>
+        </li>
 
-        <li><a href="#about">About</a></li>
-        <li><a href="#tours">House Tours</a></li>
-        <li><a href="https://apclientreview.netlify.app/"
-		target="_blank"
-       rel="noopener noreferrer">
-	   Reviews
-	   </a></li>
+        <!-- REVIEWS DROPDOWN -->
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
+
+          <div class="dropdown-menu">
+            <a href="Adam.html">Adam Peters</a>
+            <a href="Ashley.html">Ashley Peters</a>
+          </div>
+        </li>
+
+        <li><a href="About.html">About</a></li>
+        <li><a href="Tours.html">House Tours</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- SLIDESHOW -->
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/1.png" alt="Home 1" />
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" alt="Home 2" />
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" alt="Home 3" />
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" alt="Home 4" />
-    </div>
-  </div>
-
-  <div class="dot-container">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
+  <!-- PAGE CONTENT -->
+  <section class="content-wrapper">
+    <!-- This is your blank base area for content -->
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <p>&copy; 2025 Peters Group Real Estate. All rights reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT (Slideshow + Mobile Dropdown Toggle) -->
+  <!-- MOBILE DROPDOWN JS (supports multiple dropdowns) -->
   <script>
-    /* MOBILE DROPDOWN CLICK */
     document.addEventListener("DOMContentLoaded", () => {
-      const dropdown = document.querySelector(".dropdown");
-      const toggle = dropdown.querySelector(".dropdown-toggle");
+      const dropdowns = document.querySelectorAll(".dropdown");
 
-      toggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        dropdown.classList.toggle("open");
+      dropdowns.forEach(drop => {
+        const toggle = drop.querySelector(".dropdown-toggle");
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          drop.classList.toggle("open");
+        });
       });
     });
-
-    /* SLIDESHOW */
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-      const slides = document.getElementsByClassName("mySlides");
-      const dots = document.getElementsByClassName("dot");
-
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-
-      slideIndex++;
-      if (slideIndex > slides.length) slideIndex = 1;
-
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
-
-      setTimeout(showSlides, 5000);
-    }
   </script>
 
 </body>
