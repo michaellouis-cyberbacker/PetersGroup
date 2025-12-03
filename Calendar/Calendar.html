@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rental Tour Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Book a House Tour</h1>
+
+    <label for="datePicker">Select a Date:</label>
+    <input type="date" id="datePicker" min="" />
+
+    <div id="timeSlots" class="time-slots"></div>
+
+    <div id="bookingForm" class="hidden">
+      <h2>Confirm Your Booking</h2>
+      <form id="appointmentForm">
+        <input type="text" id="name" placeholder="Your Full Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <input type="tel" id="phone" placeholder="Phone (optional)" />
+        <textarea id="notes" placeholder="Notes (optional)"></textarea>
+        <input type="hidden" id="selectedSlot" name="slot" />
+        <button type="submit">Confirm Appointment</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
