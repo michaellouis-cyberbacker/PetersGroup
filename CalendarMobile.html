@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 
+<!-- Prevent redirect loops and send desktop users to desktop version -->
 <script>
-  /* Prevent redirect loop */
   document.addEventListener("DOMContentLoaded", function () {
-    const onMobilePage = window.location.pathname.toLowerCase().includes("calendarmobile.html");
-    if (!onMobilePage && window.innerWidth >= 768) {
+    const thisIsMobile = window.location.pathname.toLowerCase().includes("calendarmobile.html");
+    if (!thisIsMobile && window.innerWidth >= 768) {
       window.location.href = "Calendar.html";
     }
   });
@@ -31,7 +31,7 @@
     color: var(--navy);
   }
 
-  /* HEADER (from mobile template) */
+  /* HEADER */
   .header {
     background-color: var(--navy);
     color: var(--white);
@@ -40,7 +40,6 @@
     align-items: center;
     padding: 12px 16px;
     gap: 20px;
-    flex-wrap: nowrap;
   }
 
   .logo img {
@@ -48,6 +47,7 @@
     width: auto;
   }
 
+  /* NAVIGATION */
   .nav ul {
     list-style: none;
     margin: 0;
@@ -65,34 +65,39 @@
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9rem;
+    padding: 4px 0;
   }
 
   .nav a:hover { color: var(--gold); }
 
+  /* DROPDOWN MENU */
   .dropdown-menu {
     display: none;
+    flex-direction: column;
     position: absolute;
     left: 0;
     top: 100%;
     background-color: var(--navy);
     min-width: 160px;
-    flex-direction: column;
     padding: 10px 0;
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 999;
   }
 
   .dropdown-menu a {
     padding: 10px 18px;
-    display: block;
     white-space: nowrap;
   }
 
-  .dropdown li:hover .dropdown-menu { display: flex; }
+  /* Show dropdown on tap */
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
 
-  /* ----------------------------- */
-  /* MOBILE CALENDAR STYLING      */
-  /* ----------------------------- */
+  /* -------------------------------- */
+  /*        CALENDAR SECTION          */
+  /* -------------------------------- */
 
   .calendar-container {
     width: 92%;
@@ -156,7 +161,7 @@
     color: var(--white);
   }
 
-  /* FORM AREA */
+  /* BOOKING FORM */
   #bookingForm {
     background: var(--white);
     padding: 18px;
@@ -167,6 +172,7 @@
   #bookingForm h2 {
     font-size: 1.3rem;
     text-align: center;
+    margin-top: 0;
   }
 
   input, textarea, button {
@@ -218,7 +224,7 @@
       <li><a href="mobile.html#home">Home</a></li>
 
       <li class="dropdown">
-        <a href="#">Rentals</a>
+        <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
         <div class="dropdown-menu">
           <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1" target="_blank">RentRedi</a>
           <a href="https://www.padsplit.com/listing/14427" target="_blank">PadSplit</a>
@@ -229,7 +235,7 @@
       <li><a href="CalendarMobile.html">House Tours</a></li>
 
       <li class="dropdown">
-        <a href="#">Reviews</a>
+        <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
         <div class="dropdown-menu">
           <a href="AdamMobile.html">Adam</a>
           <a href="AshleyMobile.html">Ashley</a>
@@ -239,10 +245,7 @@
   </nav>
 </header>
 
-<!-- ------------------------------ -->
-<!--      MOBILE CALENDAR AREA      -->
-<!-- ------------------------------ -->
-
+<!-- MOBILE CALENDAR AREA -->
 <div class="calendar-container">
   <h1>Book a House Tour</h1>
 
@@ -271,11 +274,18 @@
 </footer>
 
 <script>
-/* Core logic preserved from your original app.js */
+/* Enable dropdowns on tap */
+document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
+  toggle.addEventListener("click", function (e) {
+    e.preventDefault();
+    this.parentElement.classList.toggle("open");
+  });
+});
+
+/* Calendar Logic (from app.js) */
 const startHour = 9;
 const endHour = 17;
 const interval = 30;
-
 const maxGroupSize = 5;
 let bookedSlots = {};
 
@@ -309,7 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
           slotBtn.textContent = time;
 
           slotBtn.addEventListener("click", () => {
-            document.querySelectorAll(".time-slot").forEach(s => s.classList.remove("selected"));
+            document.querySelectorAll(".time-slot")
+              .forEach(s => s.classList.remove("selected"));
+
             slotBtn.classList.add("selected");
             selectedSlotInput.value = `${date} ${time}`;
             formDiv.classList.remove("hidden");
@@ -323,8 +335,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const slot = selectedSlotInput.value;
 
+    const slot = selectedSlotInput.value;
     bookedSlots[slot.replace(" ", "_")] =
       (bookedSlots[slot.replace(" ", "_")] || 0) + 1;
 
@@ -335,9 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTimeSlots(datePicker.value);
   });
 
-  function pad(n) {
-    return n.toString().padStart(2, "0");
-  }
+  function pad(n) { return n.toString().padStart(2, "0"); }
 });
 </script>
 
