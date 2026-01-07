@@ -1,282 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetersGroup Mobile</title>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ella Valley Homes</title>
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --white: #ffffff;
+  }
 
-  <style>
-    :root {
-      --gold: #c6a25a;
-      --navy: #0d1b2a;
-      --white: #ffffff;
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--white);
+    color: var(--navy);
+  }
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--white);
-      color: var(--navy);
-    }
+  .header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--navy);
+    padding: 15px;
+    text-align: center;
+  }
 
-    /* HEADER — LEFT-ALIGNED */
-    .header {
-      background-color: var(--navy);
-      color: var(--white);
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 12px 16px;   /* slightly tighter for mobile */
-      gap: 20px;
-      flex-wrap: nowrap;
-    }
+  .header img {
+    width: 200px;
+    margin: 0 auto;
+  }
 
-    .logo img {
-      height: 50px;         /* slightly smaller logo for mobile */
-      width: auto;
-    }
+  .nav-menu {
+    background-color: var(--navy);
+    padding: 10px;
+  }
 
-    /* NAVIGATION */
-    .nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;      /* allow wrapping on small widths */
-    }
+  .nav-menu a {
+    display: block;
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px;
+    font-weight: bold;
+  }
 
-    .nav li {
-      position: relative;
-    }
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    overflow: hidden;
+  }
 
-    .nav a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      padding: 6px 0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.3s;
-    }
+  .mySlides {
+    display: none;
+    position: relative;
+  }
 
-    .nav a:hover {
-      color: var(--gold);
-    }
+  .mySlides img {
+    width: 100%;
+    height: 45vh;
+    object-fit: cover;
+  }
 
-    /* DROPDOWN MENU */
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      background-color: var(--navy);
-      min-width: 180px;
-      flex-direction: column;
-      padding: 10px 0;
-      border-radius: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      z-index: 999;
-    }
+  /* Slide button (mobile) */
+  .slide-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px 26px;
+    background-color: rgba(13, 27, 42, 0.85);
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    z-index: 999;
+  }
 
-    .dropdown-menu a {
-      padding: 10px 20px;
-      display: block;
-      white-space: nowrap;
-    }
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 10px;
+    margin-top: -18px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    user-select: none;
+  }
 
-    .dropdown-menu a:hover {
-      background-color: rgba(255,255,255,0.1);
-      color: var(--gold);
-    }
-	
-	/* Dropdown items with logos */
-.dropdown-item.with-icon {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-}
+  .prev { left: 8px; }
+  .next { right: 8px; }
 
-/* Logo sizing – scales 300x300 images cleanly */
-.dropdown-item.with-icon img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
+  .dot-container {
+    text-align: center;
+    padding: 8px;
+    background: var(--navy);
+  }
 
-/* Text alignment */
-.dropdown-item.with-icon span {
-  line-height: 1;
-}
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
 
-/* Optional subtle hover polish */
-.dropdown-item.with-icon:hover {
-  background-color: rgba(255,255,255,0.1);
-}
-
-
-    /* SHOW DROPDOWN Desktop / tap */
-    .nav li:hover .dropdown-menu {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0px);
-      pointer-events: auto;
-    }
-
-    /* MOBILE CLICK SUPPORT */
-    .nav li.open .dropdown-menu {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0px);
-      pointer-events: auto;
-    }
-
-    /* SLIDESHOW — MOBILE-SIZED */
-    .slideshow-container {
-      position: relative;
-      max-width: 100%;
-      margin: auto;
-      overflow: hidden;
-    }
-
-    .mySlides {
-      display: none;
-    }
-
-    .mySlides img {
-      width: 100%;
-      height: 55vh;          /* smaller than 80vh for mobile */
-      object-fit: cover;
-    }
-
-    .fade {
-      animation: fadeEffect 1.5s;
-    }
-
-    @keyframes fadeEffect {
-      from { opacity: 0.4; }
-      to { opacity: 1; }
-    }
-
-    .dot-container {
-      text-align: center;
-      padding: 8px;
-      background: var(--navy);
-    }
-
-    .dot {
-      height: 10px;
-      width: 10px;
-      margin: 0 3px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-
-    .active {
-      background-color: var(--gold);
-    }
-
-    /* FOOTER */
-    .footer {
-      background-color: var(--navy);
-      color: var(--white);
-      text-align: center;
-      padding: 12px;
-      font-size: 0.85rem;
-    }
-
-    /* Extra safety for very short screens */
-    @media (max-height: 600px) {
-      .mySlides img {
-        height: 45vh;
-      }
-    }
-  </style>
+  .active {
+    background-color: var(--navy);
+  }
+</style>
 </head>
-
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG" alt="Peters Group Logo" />
-    </div>
 
-    <nav class="nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-
-        <!-- RENTALS DROPDOWN -->
-<li class="dropdown">
-  <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
-  <div class="dropdown-menu rentals-menu">
-
-    <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
-       target="_blank"
-       class="dropdown-item with-icon">
-      <img
-        src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/RentRedi.png"
-        alt="RentRedi Logo"
-      />
-      <span>RentRedi</span>
-    </a>
-
-    <a href="https://www.padsplit.com/listing/14427"
-       target="_blank"
-       class="dropdown-item with-icon">
-      <img
-        src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/PadSplit.png"
-        alt="PadSplit Logo"
-      />
-      <span>PadSplit</span>
-    </a>
-
+  <div class="header">
+    <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG" alt="Peters Group Logo">
   </div>
-</li>
 
-        <li><a href="#about">About</a></li>
-        <li><a href="CalendarMobile.html">House Tours</a></li>
+  <div class="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="CalendarMobile.html">House Tours</a>
+    <a href="AdamMobile.html">Adam Peters Reviews</a>
+    <a href="AshleyMobile.html">Ashley Peters Reviews</a>
+    <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1" target="_blank">RentRedi Properties</a>
+  </div>
 
-        <li class="dropdown">
-          <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
-
-          <div class="dropdown-menu">
-            <a href="AdamMobile.html">Adam Peters</a>
-            <a href="AshleyMobile.html">Ashley Peters</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- SLIDESHOW (same slides, resized for mobile) -->
   <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="Images/MC.png" alt="Home 1" />
+    <div class="mySlides">
+      <img src="Images/MC.png" alt="Slide 1">
     </div>
 
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" alt="Home 2" />
+    <div class="mySlides">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" alt="Slide 2">
+
+      <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
+        target="_blank"
+        class="slide-button">
+        View Properties for Rent
+      </a>
     </div>
 
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" alt="Home 3" />
+    <div class="mySlides">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" alt="Slide 3">
     </div>
 
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" alt="Home 4" />
+    <div class="mySlides">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" alt="Slide 4">
     </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
   </div>
 
   <div class="dot-container">
@@ -286,51 +165,34 @@
     <span class="dot"></span>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
-  </footer>
-
-  <!-- JAVASCRIPT (Slideshow + Dropdown) -->
   <script>
-    /* MULTIPLE DROPDOWNS (tap support for mobile) */
-    document.querySelectorAll(".dropdown-toggle").forEach(tog => {
-      tog.addEventListener("click", (e) => {
-        e.preventDefault();
-        tog.parentElement.classList.toggle("open");
-      });
-    });
+    let slideIndex = 1;
+    showSlides(slideIndex);
 
-    /* SLIDESHOW */
-    let slideIndex = 0;
-    showSlides();
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
 
-    function showSlides() {
-      const slides = document.getElementsByClassName("mySlides");
-      const dots = document.getElementsByClassName("dot");
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
 
       for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }
 
-      slideIndex++;
-      if (slideIndex > slides.length) slideIndex = 1;
-
       for (let i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
       }
 
-      if (slides.length > 0) {
-        slides[slideIndex - 1].style.display = "block";
-      }
-      if (dots.length > 0) {
-        dots[slideIndex - 1].className += " active";
-      }
-
-      if (slides.length > 0) {
-        setTimeout(showSlides, 5000);
-      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
     }
+
+    setInterval(() => plusSlides(1), 5000);
   </script>
 
 </body>
