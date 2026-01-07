@@ -1,393 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if (window.innerWidth < 768) {
-      window.location.href = "CalendarMobile.html";
-    }
-  });
-</script>
-
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ella Valley Homes</title>
-
-<style>
-  :root {
-    --gold: #c6a25a;
-    --navy: #0d1b2a;
-    --white: #ffffff;
-    --light-bg: #f4f6fa;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background: var(--white);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--navy);
-  }
-
-  /* HEADER */
-  .header {
-    background-color: var(--navy);
-    color: var(--white);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 15px 40px;
-    gap: 40px;
-  }
-
-  .logo img {
-    height: 70px;
-    width: auto;
-  }
-
-  /* NAVIGATION */
-  .nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 25px;
-  }
-
-  .nav li {
-    position: relative;
-  }
-
-  .nav a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-
-  .nav a:hover {
-    color: var(--gold);
-  }
-
-  /* DROPDOWN */
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: var(--navy);
-    min-width: 180px;
-    padding: 10px 0;
-    border-radius: 6px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(10px);
-    transition: 0.25s;
-    z-index: 999;
-  }
-
-  .dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-  }
-
-  .dropdown:hover .dropdown-menu {
-    display: block;
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0px);
-  }
-  
-  /* Dropdown items with logos */
-.dropdown-item.with-icon {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-}
-
-/* Logo sizing – scales 300x300 images cleanly */
-.dropdown-item.with-icon img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* Text alignment */
-.dropdown-item.with-icon span {
-  line-height: 1;
-}
-
-/* Optional subtle hover polish */
-.dropdown-item.with-icon:hover {
-  background-color: rgba(255,255,255,0.1);
-}
-
-
-  /* ----------------------------- */
-  /* NEW CALENDAR BOOKING SECTION  */
-  /* ----------------------------- */
-
-  .calendar-container {
-    max-width: 900px;
-    margin: 50px auto;
-    background: var(--light-bg);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  }
-
-  .calendar-container h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: var(--navy);
-  }
-
-  label {
-    font-weight: bold;
-  }
-
-  input[type="date"] {
-    padding: 12px;
-    width: 100%;
-    border-radius: 6px;
-    border: 1px solid #bbb;
-    margin-top: 8px;
-  }
-
-  /* Time Slots */
-  .time-slots {
-    margin-top: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .time-slot {
-    padding: 12px 18px;
-    background: var(--white);
-    border-radius: 6px;
-    cursor: pointer;
-    border: 2px solid var(--navy);
-    font-weight: bold;
-    transition: 0.25s;
-  }
-
-  .time-slot:hover {
-    background: var(--gold);
-    color: var(--white);
-    border-color: var(--gold);
-  }
-
-  .time-slot.selected {
-    background: var(--navy);
-    color: var(--white);
-    border-color: var(--navy);
-  }
-
-  /* Booking Form */
-  #bookingForm {
-    margin-top: 30px;
-    background: var(--white);
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  input, textarea, button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-
-  button {
-    background: var(--navy);
-    color: var(--white);
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-  }
-
-  button:hover {
-    background: var(--gold);
-    color: var(--navy);
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  /* FOOTER */
-  .footer {
-    background: var(--navy);
-    color: var(--white);
-    padding: 20px;
-    text-align: center;
-    margin-top: 50px;
-  }
-</style>
-</head>
-
-<body>
-
-<header class="header">
-  <div class="logo">
-    <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG">
-  </div>
-
-  <nav class="nav">
-    <ul>
-      <li><a href="index.html#home">Home</a></li>
-
-<li class="dropdown">
-  <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
-  <div class="dropdown-menu rentals-menu">
-
-    <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
-       target="_blank"
-       class="dropdown-item with-icon">
-      <img
-        src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/RentRedi.png"
-        alt="RentRedi Logo"
-      />
-      <span>RentRedi</span>
-    </a>
-
-    <a href="https://www.padsplit.com/listing/14427"
-       target="_blank"
-       class="dropdown-item with-icon">
-      <img
-        src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/PadSplit.png"
-        alt="PadSplit Logo"
-      />
-      <span>PadSplit</span>
-    </a>
-
-  </div>
-</li>
-
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="Calendar.html">House Tours</a></li>
-
-      <li class="dropdown">
-        <a href="#">Reviews</a>
-        <div class="dropdown-menu">
-          <a href="Adam.html">Adam Peters</a>
-          <a href="Ashley.html">Ashley Peters</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<!-- ------------------------------------- -->
-<!-- REPLACEMENT FOR SLIDESHOW AREA        -->
-<!-- HOUSE TOUR BOOKING CALENDAR           -->
-<!-- ------------------------------------- -->
-
-<div class="calendar-container">
-  <h1>Book a House Tour</h1>
-
-  <label>Select a Date:</label>
-  <input type="date" id="datePicker">
-
-  <div id="timeSlots" class="time-slots"></div>
-
-  <div id="bookingForm" class="hidden">
-    <h2>Confirm Your Booking</h2>
-    
-    <form id="appointmentForm">
-      <input type="text" id="name" placeholder="Your Full Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <input type="tel" id="phone" placeholder="Phone (Optional)">
-      <textarea id="notes" placeholder="Notes (Optional)"></textarea>
-
-      <input type="hidden" id="selectedSlot" name="slot">
-
-      <button type="submit">Confirm Appointment</button>
-    </form>
-  </div>
-</div>
-
-<footer class="footer">
-  <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
-</footer>
-
-<!-- CALENDAR LOGIC (from original app.js) -->
-<script>
-  /* All logic preserved from your app.js file */
-  const startHour = 9;
-  const endHour = 17;
-  const interval = 30;
-
-  const maxGroupSize = 5;
-  let bookedSlots = {};
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const datePicker = document.getElementById("datePicker");
-    const timeSlotsDiv = document.getElementById("timeSlots");
-    const form = document.getElementById("appointmentForm");
-    const formDiv = document.getElementById("bookingForm");
-    const selectedSlotInput = document.getElementById("selectedSlot");
-
-    const today = new Date().toISOString().split("T")[0];
-    datePicker.min = today;
-
-    datePicker.addEventListener("change", () => {
-      const selectedDate = datePicker.value;
-      renderTimeSlots(selectedDate);
-      formDiv.classList.add("hidden");
-    });
-
-    function renderTimeSlots(date) {
-      timeSlotsDiv.innerHTML = "";
-
-      for (let hour = startHour; hour < endHour; hour++) {
-        for (let min = 0; min < 60; min += interval) {
-          const time = `${pad(hour)}:${pad(min)}`;
-          const key = `${date}_${time}`;
-          const bookedCount = bookedSlots[key] || 0;
-
-          if (bookedCount < maxGroupSize) {
-            const slotBtn = document.createElement("div");
-            slotBtn.className = "time-slot";
-            slotBtn.innerText = time;
-
-            slotBtn.addEventListener("click", () => {
-              document.querySelectorAll(".time-slot").forEach(s => s.classList.remove("selected"));
-              slotBtn.classList.add("selected");
-              selectedSlotInput.value = `${date} ${time}`;
-              formDiv.classList.remove("hidden");
-            });
-
-            timeSlotsDiv.appendChild(slotBtn);
-          }
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.innerWidth < 768) {
+          window.location.href = "CalendarMobile.html";
         }
+      });
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ella Valley Homes</title>
+    <style>
+      :root {
+        --gold: #c6a25a;
+        --navy: #0d1b2a;
+        --white: #ffffff;
       }
-    }
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const slot = selectedSlotInput.value;
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--white);
+        color: var(--navy);
+      }
 
-      bookedSlots[slot.replace(" ", "_")] =
-        (bookedSlots[slot.replace(" ", "_")] || 0) + 1;
+      .header {
+        background-color: var(--navy);
+        color: var(--white);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 15px 40px;
+        gap: 40px;
+        flex-wrap: nowrap;
+      }
 
-      alert("Appointment booked for " + slot);
+      .logo img {
+        height: 70px;
+        width: auto;
+      }
 
-      form.reset();
-      formDiv.classList.add("hidden");
-      renderTimeSlots(datePicker.value);
-    });
+      .nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 25px;
+        align-items: center;
+      }
 
-    function pad(n) {
-      return n.toString().padStart(2, "0");
-    }
-  });
-</script>
+      .nav li {
+        position: relative;
+      }
 
-</body>
+      .nav a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: bold;
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.3s;
+      }
+
+      .nav a:hover {
+        color: var(--gold);
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        background-color: var(--navy);
+        min-width: 180px;
+        flex-direction: column;
+        padding: 10px 0;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: 999;
+      }
+
+      .dropdown-menu a {
+        padding: 10px 20px;
+        display: block;
+        white-space: nowrap;
+      }
+
+      .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--gold);
+      }
+
+      .dropdown-item.with-icon {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+      }
+
+      .dropdown-item.with-icon img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      .dropdown-item.with-icon span {
+        line-height: 1;
+      }
+
+      .nav li:hover .dropdown-menu,
+      .nav li.open .dropdown-menu {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0px);
+        pointer-events: auto;
+      }
+
+      .calendar-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .calendar-container h1 {
+        text-align: center;
+        margin-bottom: 24px;
+        color: var(--navy);
+      }
+
+      .footer {
+        background-color: var(--navy);
+        color: var(--white);
+        text-align: center;
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+          src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG"
+          alt="Peters Group Logo"
+        />
+      </div>
+
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+
+          <li class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
+            <div class="dropdown-menu rentals-menu">
+              <a
+                href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
+                target="_blank"
+                class="dropdown-item with-icon"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/RentRedi.png"
+                  alt="RentRedi Logo"
+                />
+                <span>RentRedi</span>
+              </a>
+              <a
+                href="https://www.padsplit.com/listing/14427"
+                target="_blank"
+                class="dropdown-item with-icon"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/PadSplit.png"
+                  alt="PadSplit Logo"
+                />
+                <span>PadSplit</span>
+              </a>
+            </div>
+          </li>
+
+          <li><a href="#about">About</a></li>
+          <li><a href="Calendar.html">House Tours</a></li>
+
+          <li class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
+            <div class="dropdown-menu">
+              <a href="Adam.html">Adam Peters</a>
+              <a href="Ashley.html">Ashley Peters</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="calendar-container">
+        <h1>Book a House Tour</h1>
+
+        <iframe
+          id="JotFormIFrame-260066429041451"
+          title="House Tour Schedule"
+          onload="window.parent.scrollTo(0,0)"
+          allowtransparency="true"
+          allow="geolocation; microphone; camera; fullscreen; payment"
+          src="https://form.jotform.com/260066429041451"
+          frameborder="0"
+          style="min-width:100%;max-width:100%;height:539px;border:none;"
+          scrolling="no"
+        ></iframe>
+
+        <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+        <script>
+          window.jotformEmbedHandler(
+            "iframe[id='JotFormIFrame-260066429041451']",
+            "https://form.jotform.com/"
+          );
+        </script>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
