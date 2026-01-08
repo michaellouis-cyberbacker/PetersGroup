@@ -2,17 +2,9 @@
 <html lang="en">
 <head>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    if (window.innerWidth < 768) {
-      window.location.href = "mobile.html";
-    }
-  });
-</script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Peters Group Real Estate</title>
+  <title>Ella Valley Homes</title>
 
   <style>
     :root {
@@ -28,31 +20,30 @@
       color: var(--navy);
     }
 
-    /* HEADER — NOW LEFT-ALIGNED */
     .header {
       background-color: var(--navy);
       color: var(--white);
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      padding: 15px 40px;
-      gap: 40px;
+      padding: 12px 16px;
+      gap: 20px;
       flex-wrap: nowrap;
     }
 
     .logo img {
-      height: 70px;
+      height: 50px;
       width: auto;
     }
 
-    /* NAVIGATION */
     .nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 25px;
+      gap: 16px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav li {
@@ -63,7 +54,8 @@
       color: var(--white);
       text-decoration: none;
       font-weight: bold;
-      padding: 8px 0;
+      font-size: 0.9rem;
+      padding: 6px 0;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -74,7 +66,6 @@
       color: var(--gold);
     }
 
-    /* DROPDOWN MENU */
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -104,7 +95,6 @@
       color: var(--gold);
     }
 
-    /* Dropdown items with logos */
     .dropdown-item.with-icon {
       display: flex;
       align-items: center;
@@ -123,15 +113,7 @@
       line-height: 1;
     }
 
-    /* SHOW DROPDOWN Desktop */
-    .nav li:hover .dropdown-menu {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0px);
-      pointer-events: auto;
-    }
-
-    /* MOBILE CLICK SUPPORT */
+    .nav li:hover .dropdown-menu,
     .nav li.open .dropdown-menu {
       display: flex;
       opacity: 1;
@@ -139,7 +121,6 @@
       pointer-events: auto;
     }
 
-    /* SLIDESHOW */
     .slideshow-container {
       position: relative;
       max-width: 100%;
@@ -149,12 +130,12 @@
 
     .mySlides {
       display: none;
-      position: relative; /* IMPORTANT for overlay button positioning */
+      position: relative;
     }
 
     .mySlides img {
       width: 100%;
-      height: 80vh;
+      height: 55vh;
       object-fit: cover;
     }
 
@@ -169,14 +150,14 @@
 
     .dot-container {
       text-align: center;
-      padding: 10px;
+      padding: 8px;
       background: var(--navy);
     }
 
     .dot {
-      height: 12px;
-      width: 12px;
-      margin: 0 5px;
+      height: 10px;
+      width: 10px;
+      margin: 0 3px;
       background-color: #bbb;
       border-radius: 50%;
       display: inline-block;
@@ -187,67 +168,62 @@
       background-color: var(--gold);
     }
 
-    /* FOOTER */
     .footer {
       background-color: var(--navy);
       color: var(--white);
       text-align: center;
-      padding: 15px;
+      padding: 12px;
+      font-size: 0.85rem;
     }
 
-    /* Slideshow arrows */
+    @media (max-height: 600px) {
+      .mySlides img {
+        height: 45vh;
+      }
+    }
+
+    /* NEW NAV BUTTONS */
     .prev, .next {
       cursor: pointer;
       position: absolute;
       top: 50%;
       width: auto;
-      padding: 12px;
+      padding: 10px;
       margin-top: -22px;
       color: white;
       font-weight: bold;
-      font-size: 24px;
-      transition: 0.3s ease;
+      font-size: 22px;
+      background-color: rgba(0, 0, 0, 0.4);
       border-radius: 3px;
       user-select: none;
-      background-color: rgba(0, 0, 0, 0.4);
       z-index: 998;
     }
 
-    .prev:hover, .next:hover {
-      background-color: rgba(0, 0, 0, 0.6);
-    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
 
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
-
-    /* ✅ SLIDE BUTTON (Centered inside image, now navy/white) */
+    /* CENTERED BUTTON ON SLIDE */
     .slide-button {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 16px 34px;
-      background-color: rgba(13, 27, 42, 0.85); /* semi-transparent navy */
+      padding: 14px 28px;
+      background-color: rgba(13, 27, 42, 0.85);
       color: white;
       font-weight: bold;
-      border-radius: 8px;
+      border-radius: 6px;
       text-decoration: none;
-      font-size: 1.05rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-      transition: 0.25s ease;
-      border: 2px solid rgba(255, 255, 255, 0.35);
+      font-size: 1rem;
       z-index: 999;
+      border: 2px solid rgba(255, 255, 255, 0.35);
     }
 
     .slide-button:hover {
-      background-color: rgba(13, 27, 42, 1); /* solid navy on hover */
-      transform: translate(-50%, -50%) scale(1.03);
+      background-color: rgba(13, 27, 42, 1);
+      transform: translate(-50%, -50%) scale(1.05);
     }
+
   </style>
 </head>
 
@@ -262,42 +238,28 @@
       <ul>
         <li><a href="index.html">Home</a></li>
 
-        <!-- RENTALS DROPDOWN -->
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
           <div class="dropdown-menu rentals-menu">
-
-            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
-              target="_blank"
-              class="dropdown-item with-icon">
-              <img
-                src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/RentRedi.png"
-                alt="RentRedi Logo"
-              />
+            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1" target="_blank" class="dropdown-item with-icon">
+              <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/RentRedi.png" alt="RentRedi Logo" />
               <span>RentRedi</span>
             </a>
-
-            <a href="https://www.padsplit.com/listing/14427"
-              target="_blank"
-              class="dropdown-item with-icon">
-              <img
-                src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/PadSplit.png"
-                alt="PadSplit Logo"
-              />
+            <a href="https://www.padsplit.com/listing/14427" target="_blank" class="dropdown-item with-icon">
+              <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/PadSplit.png" alt="PadSplit Logo" />
               <span>PadSplit</span>
             </a>
-
           </div>
         </li>
 
         <li><a href="#about">About</a></li>
-        <li><a href="Calendar.html">House Tours</a></li>
+        <li><a href="CalendarMobile.html">House Tours</a></li>
 
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
           <div class="dropdown-menu">
-            <a href="Adam.html">Adam Peters</a>
-            <a href="Ashley.html">Ashley Peters</a>
+            <a href="AdamMobile.html">Adam Peters</a>
+            <a href="AshleyMobile.html">Ashley Peters</a>
           </div>
         </li>
       </ul>
@@ -306,15 +268,12 @@
 
   <!-- SLIDESHOW -->
   <div class="slideshow-container">
-
     <div class="mySlides fade">
       <img src="Images/MC.png" alt="Home 1" />
     </div>
 
-    <!-- Slide 2 with Button -->
     <div class="mySlides fade">
       <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" alt="Home 2" />
-
       <a
         href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
         target="_blank"
@@ -326,18 +285,24 @@
 
     <div class="mySlides fade">
       <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" alt="Home 3" />
+      <a
+        href="https://www.padsplit.com/listing/14427"
+        target="_blank"
+        class="slide-button"
+      >
+        Book on PadSplit
+      </a>
     </div>
 
     <div class="mySlides fade">
       <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" alt="Home 4" />
     </div>
 
-    <!-- Navigation Arrows -->
+    <!-- NAV BUTTONS -->
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
 
-  <!-- DOTS -->
   <div class="dot-container">
     <span class="dot"></span>
     <span class="dot"></span>
@@ -350,9 +315,8 @@
     <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT (Slideshow + Dropdown) -->
+  <!-- JAVASCRIPT -->
   <script>
-    /* MULTIPLE DROPDOWNS */
     document.querySelectorAll(".dropdown-toggle").forEach(tog => {
       tog.addEventListener("click", (e) => {
         e.preventDefault();
@@ -360,7 +324,6 @@
       });
     });
 
-    /* SLIDESHOW NAV + DOTS */
     let slideIndex = 1;
     showSlides(slideIndex);
 
@@ -387,7 +350,6 @@
       dots[slideIndex - 1].className += " active";
     }
 
-    /* AUTO PLAY */
     setInterval(() => plusSlides(1), 5000);
   </script>
 
