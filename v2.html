@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ella Valley Homes</title>
+
+  <style>
+    :root {
+      --gold: #c6a25a;
+      --navy: #0d1b2a;
+      --navy-dark: #08121f;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%);
+      color: var(--white);
+    }
+
+    /* LOGO */
+    .logo-center {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    .logo-center img {
+      height: 90px;
+    }
+
+    /* SLIDESHOW */
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto 0;
+      overflow: hidden;
+    }
+
+    .mySlides {
+      display: none;
+      position: relative;
+    }
+
+    .mySlides img {
+      width: 100%;
+      height: 80vh;
+      object-fit: cover;
+    }
+
+    .fade {
+      animation: fadeEffect 1.5s;
+    }
+
+    @keyframes fadeEffect {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    .slide-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 16px 34px;
+      background-color: rgba(13, 27, 42, 0.85);
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.35);
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      padding: 12px;
+      color: white;
+      font-size: 24px;
+      background-color: rgba(0,0,0,0.4);
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .dot-container {
+      text-align: center;
+      padding: 15px;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .active {
+      background-color: var(--gold);
+    }
+
+    /* CONTENT */
+    .content-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .content-section h1 {
+      color: var(--gold);
+      font-size: 2.4rem;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      color: #e0e0e0;
+    }
+
+    /* PROPERTIES PLACEHOLDER */
+    .properties-placeholder {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 40px;
+      border: 3px dashed var(--gold);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .properties-placeholder span {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--gold);
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* JOTFORM */
+    .calendar-container {
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    /* FOOTER */
+    .footer {
+      background-color: var(--navy-dark);
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="logo-center">
+    <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG">
+  </div>
+
+  <!-- SLIDESHOW -->
+  <div class="slideshow-container">
+    <div class="mySlides fade"><img src="Images/MC.png"></div>
+    <div class="mySlides fade">
+      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png">
+      <a href="#" class="slide-button">View Properties for Rent</a>
+    </div>
+    <div class="mySlides fade"><img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png"></div>
+    <div class="mySlides fade"><img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png"></div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+
+  <div class="dot-container">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    <h1>Walking You Home</h1>
+    <p>At <b>Ella Valley Homes</b>, we believe a house is more than just four walls and a roof, it’s the backdrop to your life’s most meaningful moments. Based in the heart of Kansas City, we specialize in providing quality residential rentals across the KC metro and throughout Kansas.</p>
+
+<p>Our tagline, "Walking You Home," isn’t just a slogan; it’s our commitment to you. We understand that navigating the rental market can feel overwhelming, which is why we prioritize clear communication, reliable maintenance, and a personal touch. Whether you’re looking for a quiet suburban retreat or a home close to the city’s pulse, we are here to guide you every step of the way until the keys are in your hand.</p>
+
+    <!-- PLACEHOLDER -->
+    <div class="properties-placeholder">
+      <span>Available properties will be displayed here soon!</span>
+    </div>
+
+    <!-- JOTFORM -->
+    <div class="calendar-container">
+      <iframe
+        src="https://form.jotform.com/260066429041451"
+        style="width:100%; height:540px; border:none;">
+      </iframe>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("dot");
+
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+      for (let i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(" active", "");
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+
+    setInterval(() => plusSlides(1), 5000);
+  </script>
+
+</body>
+</html>
