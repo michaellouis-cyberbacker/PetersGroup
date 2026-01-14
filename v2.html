@@ -270,15 +270,29 @@
 
   <!-- CONTENT -->
   <section class="content-section">
-    <h1><em>Walking You Home</em></h1>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-    <p>
-      At <b>Ella Valley Homes</b>, we believe a house is more than just four walls and a roof,
+<p style="font-family: 'Lora', serif; font-size: 48px; font-weight: 700;">
+    WALKING YOU HOME
+</p>
+
+<p style="font-family: 'Lora', serif; font-size: 18px; font-weight: 700;">
+      At <span style="color: #c6a25a; font-weight: 700;">Ella Valley Homes</span>, we believe a house is more than just four walls and a roof,
       it’s the backdrop to your life’s most meaningful moments.
     </p>
+    
+    <div style="text-align: center; margin: 40px 0;">
+    <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a; vertical-align: middle;"></span>
+    <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
+    <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a; vertical-align: middle;"></span>
+</div>
 
     <section>
-      <h2>Available Listings</h2>
+      <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<p style="font-family: 'Lora', serif; font-size: 28px; font-weight: 700;">
+  Properties For Rent
+  </p>
       <div id="listings-grid"></div>
       <div id="pagination" class="pagination"></div>
     </section>
@@ -313,9 +327,11 @@
           <h3>${x.title}</h3>
           <p class="meta">${x.location}</p>
           <p class="price">${x.price}</p>
-          ${x.external_url ? `<a class="btn" href="${x.external_url}" target="_blank">View Details</a>` : ``}
+          ${x.external_url
+            ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">Apply Now</a>`
+            : ``}
         </article>
-      `).join('') || `<p>No available listings right now.</p>`;
+      `).join('') || `<p>No listings found.</p>`;
 
       renderPagination();
     }
@@ -344,7 +360,7 @@
     fetch('/data/listings.json')
       .then(r => r.json())
       .then(({ listings }) => {
-        listingsData = (listings || []).filter(x => x.status === "Available");
+        listingsData = listings || [];   // ✅ SHOW ALL LISTINGS
         renderListings();
       })
       .catch(() => {
