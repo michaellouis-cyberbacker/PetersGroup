@@ -3,19 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <script>
-  (function () {
-    const isMobile =
-      /Android|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Prevent redirect loop
-    if (isMobile && !window.location.pathname.includes("v2_mobile.html")) {
-      window.location.href = "/v2_mobile.html";
-    }
-  })();
-</script>
-
   <title>Ella Valley Homes</title>
 
   <style>
@@ -237,6 +224,104 @@
       padding: 15px;
       margin-top: 40px;
     }
+	
+	/* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* LOGO */
+  .logo-center img {
+    height: 65px;
+  }
+
+  /* SLIDESHOW */
+  .mySlides img {
+    height: 45vh;
+  }
+
+  .slide-button {
+    padding: 12px 18px;
+    font-size: 14px;
+    text-align: center;
+    width: auto;
+    max-width: 90%;
+  }
+
+  .prev, .next {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  /* HERO TEXT */
+  .content-section {
+    padding: 16px;
+    margin: 30px auto;
+  }
+
+  .content-section h1 {
+    font-size: 1.9rem;
+  }
+
+  /* Inline styled headings */
+  p[style*="font-size: 48px"] {
+    font-size: 32px !important;
+    line-height: 1.2;
+  }
+
+  p[style*="font-size: 28px"] {
+    font-size: 22px !important;
+  }
+
+  p[style*="font-size: 18px"] {
+    font-size: 16px !important;
+  }
+
+  /* Divider lines */
+  span[style*="width: 300px"] {
+    width: 90px !important;
+  }
+
+  /* LISTINGS */
+  #listings-grid {
+    gap: 14px;
+  }
+
+  .listing-card img {
+    height: 160px;
+  }
+
+  /* PAGINATION */
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pagination button {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  /* JOTFORM */
+  .calendar-container {
+    padding: 12px;
+  }
+
+  .calendar-container iframe {
+    height: 480px;
+  }
+
+  /* FOOTER */
+  .footer {
+    font-size: 0.85rem;
+  }
+}
+
   </style>
 </head>
 
