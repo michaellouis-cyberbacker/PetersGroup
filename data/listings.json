@@ -6,6 +6,14 @@
       "location": "728 S Kansas Ave, Olathe, KS 66061",
       "status": "Available",
       "image": "/assets/images/img_0048.jpeg"
+    },
+    {
+      "title": "Sample",
+      "price": "$1000",
+      "location": "Sample Town, Sample State",
+      "status": "Sold",
+      "image": "/assets/images/1.png",
+      "external_url": "https://www.zillow.com"
     }
   ]
 }
