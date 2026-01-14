@@ -124,12 +124,97 @@
       color: #e0e0e0;
     }
 
+    /* LISTINGS */
+    #listings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .listing-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .listing-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .listing-card h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .listing-card .meta {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .listing-card .price {
+      font-weight: 700;
+      margin: 6px 0 10px;
+      color: var(--gold);
+    }
+
+    .listing-card .btn {
+      margin-top: auto;
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* PAGINATION */
+    .pagination {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pagination button {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .pagination span {
+      color: #ddd;
+      font-size: 0.9rem;
+    }
+
     /* JOTFORM */
     .calendar-container {
       background-color: #f7f7f7;
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      margin-top: 50px;
     }
 
     /* FOOTER */
@@ -148,9 +233,8 @@
     <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG">
   </div>
 
-<!-- SLIDESHOW -->
+  <!-- SLIDESHOW -->
   <div class="slideshow-container">
-
     <div class="mySlides fade">
       <img src="Images/MC.png" alt="Home 1">
     </div>
@@ -187,71 +271,18 @@
   <!-- CONTENT -->
   <section class="content-section">
     <h1><em>Walking You Home</em></h1>
-    <p>At <b>Ella Valley Homes</b>, we believe a house is more than just four walls and a roof, it’s the backdrop to your life’s most meaningful moments. Based in the heart of Kansas City, we specialize in providing quality residential rentals across the KC metro and throughout Kansas.</p>
 
-<p>Our tagline, "Walking You Home," isn’t just a slogan; it’s our commitment to you. We understand that navigating the rental market can feel overwhelming, which is why we prioritize clear communication, reliable maintenance, and a personal touch. Whether you’re looking for a quiet suburban retreat or a home close to the city’s pulse, we are here to guide you every step of the way until the keys are in your hand.</p>
+    <p>
+      At <b>Ella Valley Homes</b>, we believe a house is more than just four walls and a roof,
+      it’s the backdrop to your life’s most meaningful moments.
+    </p>
 
-<section>
-  <h2>Available Listings</h2>
-  <div id="listings-grid"></div>
-</section>
+    <section>
+      <h2>Available Listings</h2>
+      <div id="listings-grid"></div>
+      <div id="pagination" class="pagination"></div>
+    </section>
 
-<script>
-fetch('/data/listings.json')
-  .then(r => r.json())
-  .then(({ listings }) => {
-    const grid = document.getElementById('listings-grid');
-
-    // Show only Available listings (change if you want)
-    const visible = (listings || []).filter(x => x.status === "Available");
-
-    grid.innerHTML = visible.map(x => `
-      <article class="listing-card">
-        <img src="${x.image}" alt="${x.title}">
-        <h3>${x.title}</h3>
-        <p class="meta">${x.location}</p>
-        <p class="price">${x.price}</p>
-        ${x.external_url ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">View Details</a>` : ``}
-      </article>
-    `).join('') || `<p>No available listings right now.</p>`;
-  })
-  .catch(err => {
-    document.getElementById('listings-grid').innerHTML =
-      `<p>Listings failed to load.</p>`;
-    console.error(err);
-  });
-</script>
-
-<style>
-#listings-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-}
-.listing-card{
-  border:1px solid #e5e5e5;
-  border-radius:14px;
-  padding:14px;
-}
-.listing-card img{
-  width:100%;
-  height:auto;
-  border-radius:12px;
-  display:block;
-}
-.listing-card .meta{ margin:8px 0 0; }
-.listing-card .price{ font-weight:700; margin:8px 0; }
-.listing-card .btn{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:10px;
-  border:1px solid #111;
-  text-decoration:none;
-}
-</style>
-
-
-    <!-- JOTFORM -->
     <div class="calendar-container">
       <iframe
         src="https://form.jotform.com/260066429041451"
@@ -264,6 +295,65 @@ fetch('/data/listings.json')
     <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
   </footer>
 
+  <!-- LISTINGS SCRIPT -->
+  <script>
+    const PAGE_SIZE = 5;
+    let currentPage = 1;
+    let listingsData = [];
+
+    function renderListings() {
+      const grid = document.getElementById('listings-grid');
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+      const pageItems = listingsData.slice(start, end);
+
+      grid.innerHTML = pageItems.map(x => `
+        <article class="listing-card">
+          <img src="${x.image}" alt="${x.title}">
+          <h3>${x.title}</h3>
+          <p class="meta">${x.location}</p>
+          <p class="price">${x.price}</p>
+          ${x.external_url ? `<a class="btn" href="${x.external_url}" target="_blank">View Details</a>` : ``}
+        </article>
+      `).join('') || `<p>No available listings right now.</p>`;
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      const totalPages = Math.ceil(listingsData.length / PAGE_SIZE);
+
+      if (totalPages <= 1) {
+        pagination.innerHTML = "";
+        return;
+      }
+
+      pagination.innerHTML = `
+        <button ${currentPage === 1 ? "disabled" : ""} onclick="changePage(${currentPage - 1})">Prev</button>
+        <span>Page ${currentPage} of ${totalPages}</span>
+        <button ${currentPage === totalPages ? "disabled" : ""} onclick="changePage(${currentPage + 1})">Next</button>
+      `;
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      renderListings();
+    }
+
+    fetch('/data/listings.json')
+      .then(r => r.json())
+      .then(({ listings }) => {
+        listingsData = (listings || []).filter(x => x.status === "Available");
+        renderListings();
+      })
+      .catch(() => {
+        document.getElementById('listings-grid').innerHTML =
+          `<p>Listings failed to load.</p>`;
+      });
+  </script>
+
+  <!-- SLIDESHOW SCRIPT -->
   <script>
     let slideIndex = 1;
     showSlides(slideIndex);
