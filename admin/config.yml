@@ -7,24 +7,24 @@ public_folder: "/assets/images"
 
 collections:
   - name: "listings"
-    label: "Property Listings"
-    folder: "content/listings"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "string" }
-      - { label: "Location", name: "location", widget: "string" }
+    label: "Listings"
+    files:
+      - label: "All Listings"
+        name: "all_listings"
+        file: "data/listings.json"
+        fields:
+          - label: "Listings"
+            name: "listings"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.status}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options: ["Available", "Sold", "Under Contract"]
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "External URL", name: "external_url", widget: "string", required: false }
 
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        options: ["Available", "Sold", "Under Contract"]
-
-      - { label: "Featured Image", name: "image", widget: "image" }
-
-      - label: "External Listing URL"
-        name: "external_url"
-        widget: "string"
-        required: false
-        pattern: ['^https?://', "Must be a valid URL starting with http:// or https://"]
