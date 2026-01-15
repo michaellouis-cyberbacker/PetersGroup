@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Content Manager</title>
   </head>
 
@@ -12,5 +12,39 @@
 
     <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+
+    <script>
+      // Defensive auth handling for Decap CMS
+      if (window.netlifyIdentity) {
+        netlifyIdentity.on('init', user => {
+          // If Identity initializes but user token is stale
+          if (!user) {
+            netlifyIdentity.logout();
+          }
+        });
+
+        netlifyIdentity.on('error', err => {
+          console.warn('Netlify Identity error detected. Resetting session.', err);
+          netlifyIdentity.logout();
+          window.location.reload();
+        });
+
+        netlifyIdentity.on('logout', () => {
+          console.info('Logged out. Reloading for clean login.');
+          window.location.reload();
+        });
+      }
+
+      // Catch unexpected runtime auth failures
+      window.addEventListener('error', function (e) {
+        if (String(e.message).includes('Git Gateway')) {
+          console.warn('Git Gateway error detected. Forcing logout.');
+          if (window.netlifyIdentity) {
+            netlifyIdentity.logout();
+          }
+          window.location.reload();
+        }
+      });
+    </script>
   </body>
 </html>

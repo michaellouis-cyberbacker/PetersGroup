@@ -1,10 +1,3 @@
-backend:
-  name: git-gateway
-  branch: main
-
-media_folder: "assets/images"
-public_folder: "/assets/images"
-
 collections:
   - name: "listings"
     label: "Listings"
@@ -21,10 +14,21 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Price", name: "price", widget: "string" }
               - { label: "Location", name: "location", widget: "string" }
+
+              # 🆕 NEW FIELDS
+              - { label: "Bedrooms", name: "bedrooms", widget: "number", min: 0, value_type: "int" }
+              - { label: "Bathrooms", name: "bathrooms", widget: "number", min: 0, value_type: "float", step: 0.5 }
+              - { label: "Lot Size (sq ft)", name: "lot_size", widget: "number", min: 0 }
+
+              # 🆕 UPDATED STATUS OPTIONS
               - label: "Status"
                 name: "status"
                 widget: "select"
-                options: ["Available", "Sold", "Under Contract"]
+                options:
+                  - Available
+                  - Coming Soon
+                  - Under Contract
+                  - Sold
+
               - { label: "Image", name: "image", widget: "image" }
               - { label: "External URL", name: "external_url", widget: "string", required: false }
-
