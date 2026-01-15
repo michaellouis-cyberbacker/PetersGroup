@@ -1,25 +1,15 @@
 {
   "listings": [
     {
-      "title": "2 Bedroom 1 Bath Olathe, Kansas",
+      "bathrooms": 1,
       "price": "$1500",
+      "lot_size": 572,
+      "status": "Available",
       "location": "728 S Kansas Ave, Olathe, KS 66061",
-      "status": "Coming Soon",
-      "image": "/assets/images/img_0048.jpeg",
       "bedrooms": 2,
-      "bathrooms": 1,
-      "lot_size": 572
-    },
-    {
-      "bathrooms": 1,
-      "price": "$1000",
-      "lot_size": 1,
-      "status": "Sold",
-      "location": "Sample Town, Sample State",
-      "bedrooms": 1,
-      "title": "Sample",
-      "image": "/assets/images/1.png",
-      "external_url": "https://www.zillow.com"
+      "title": "2 Bedroom 1 Bath Olathe, Kansas",
+      "image": "/assets/images/img_0048.jpeg",
+      "external_url": "https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1/-Oj2Y-a9q80QgyHxx9Cl/-Oj2XjtRVand7QxenWg5"
     },
     {
       "bathrooms": 1,
@@ -31,6 +21,17 @@
       "title": "3 Bedroom 1 Bath 5716 Park Ave, Main - Section 8 Accepted",
       "image": "/assets/images/5716.jpg",
       "external_url": "https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1/-OgCpNQPpPRjkE9Vzi_X/Main"
+    },
+    {
+      "bathrooms": 2,
+      "price": "$1800",
+      "lot_size": 916,
+      "status": "Sold",
+      "location": "314 W Insley Bonner Springs, KS ",
+      "bedrooms": 4,
+      "title": "314 W Insley, Bonner Springs, KS",
+      "image": "/assets/images/670c7b5974265ed1e1405ac07dc91603-cc_ft_768.webp",
+      "external_url": ""
     }
   ]
 }
