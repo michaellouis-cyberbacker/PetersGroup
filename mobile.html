@@ -1,367 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPE16TL1MC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GPE16TL1MC');
-</script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script>
+    (function () {
+      const isMobile =
+        /Android|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+      if (isMobile && !window.location.pathname.includes("mobile.html")) {
+        window.location.href = "/mobile.html";
+      }
+    })();
+  </script>
+
   <title>Ella Valley Homes</title>
 
   <style>
     :root {
       --gold: #c6a25a;
       --navy: #0d1b2a;
-      --white: #ffffff;
+      --cream: #f8f6f1;
+      --green: #4ade80;
+      --red: #f87171;
+      --blue: #60a5fa;
     }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--white);
+      background: var(--cream);
       color: var(--navy);
     }
 
-    .header {
-      background-color: var(--navy);
-      color: var(--white);
+/* HERO LOGO HEADER */
+.hero-logo {
+  background: var(--navy);
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.hero-logo img {
+  max-width: 400px;
+  width: 90%;
+  height: auto;
+}
+
+    /* CONTENT */
+    .content-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* LISTINGS */
+    #listings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .listing-card {
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 12px 16px;
-      gap: 20px;
-      flex-wrap: nowrap;
-    }
-
-    .logo img {
-      height: 50px;
-      width: auto;
-    }
-
-    .nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .nav li {
-      position: relative;
-    }
-
-    .nav a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      padding: 6px 0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.3s;
-    }
-
-    .nav a:hover {
-      color: var(--gold);
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      background-color: var(--navy);
-      min-width: 180px;
       flex-direction: column;
-      padding: 10px 0;
-      border-radius: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      z-index: 999;
+      background: #ffffff;
+      position: relative;
     }
 
-    .dropdown-menu a {
-      padding: 10px 20px;
-      display: block;
-      white-space: nowrap;
+    .listing-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
     }
 
-    .dropdown-menu a:hover {
-      background-color: rgba(255,255,255,0.1);
+    /* STATUS BADGE */
+    .status-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 999px;
+      text-transform: uppercase;
+      color: #111;
+    }
+
+    .status-Available { background: var(--green); }
+    .status-Coming-Soon { background: var(--blue); }
+    .status-Under-Contract { background: var(--gold); }
+    .status-Sold { background: var(--red); }
+
+    .listing-card h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .listing-card .meta {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .details {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 4px 0 6px;
+    }
+
+    .listing-card .price {
+      font-weight: 700;
+      margin: 6px 0 10px;
       color: var(--gold);
     }
 
-    .dropdown-item.with-icon {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 18px;
-    }
-
-    .dropdown-item.with-icon img {
-      width: 22px;
-      height: 22px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .dropdown-item.with-icon span {
-      line-height: 1;
-    }
-
-    .nav li:hover .dropdown-menu,
-    .nav li.open .dropdown-menu {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0px);
-      pointer-events: auto;
-    }
-
-    .slideshow-container {
-      position: relative;
-      max-width: 100%;
-      margin: auto;
-      overflow: hidden;
-    }
-
-    .mySlides {
-      display: none;
-      position: relative;
-    }
-
-    .mySlides img {
-      width: 100%;
-      height: 55vh;
-      object-fit: cover;
-    }
-
-    .fade {
-      animation: fadeEffect 1.5s;
-    }
-
-    @keyframes fadeEffect {
-      from { opacity: 0.4; }
-      to { opacity: 1; }
-    }
-
-    .dot-container {
-      text-align: center;
-      padding: 8px;
-      background: var(--navy);
-    }
-
-    .dot {
-      height: 10px;
-      width: 10px;
-      margin: 0 3px;
-      background-color: #bbb;
-      border-radius: 50%;
+    .listing-card .btn {
+      margin-top: auto;
       display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-
-    .active {
-      background-color: var(--gold);
-    }
-
-    .footer {
-      background-color: var(--navy);
-      color: var(--white);
-      text-align: center;
-      padding: 12px;
-      font-size: 0.85rem;
-    }
-
-    @media (max-height: 600px) {
-      .mySlides img {
-        height: 45vh;
-      }
-    }
-
-    /* NEW NAV BUTTONS */
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 10px;
-      margin-top: -22px;
-      color: white;
-      font-weight: bold;
-      font-size: 22px;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 3px;
-      user-select: none;
-      z-index: 998;
-    }
-
-    .prev { left: 10px; }
-    .next { right: 10px; }
-
-    /* CENTERED BUTTON ON SLIDE */
-    .slide-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 14px 28px;
-      background-color: rgba(13, 27, 42, 0.85);
-      color: white;
-      font-weight: bold;
-      border-radius: 6px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
       text-decoration: none;
-      font-size: 1rem;
-      z-index: 999;
-      border: 2px solid rgba(255, 255, 255, 0.35);
+      text-align: center;
+      font-weight: 600;
     }
 
-    .slide-button:hover {
-      background-color: rgba(13, 27, 42, 1);
-      transform: translate(-50%, -50%) scale(1.05);
+    .btn.disabled {
+      opacity: 0.45;
+      pointer-events: none;
     }
+
+    /* PAGINATION */
+    .pagination {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pagination button {
+      background: transparent;
+      color: var(--navy);
+      border: 1px solid var(--navy);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .pagination span {
+      font-size: 0.9rem;
+    }
+
+    /* JOTFORM */
+    .calendar-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      margin-top: 50px;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid #ddd;
+      text-align: center;
+      padding: 15px;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+	
+/* ============================= */
+/* MOBILE RESPONSIVE OVERRIDES */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  /* HERO LOGO HEADER */
+  .hero-logo {
+    min-height: 420px;
+    padding: 40px 16px;
+  }
+
+  .hero-logo img {
+    max-width: 320px;
+    width: 100%;
+  }
+
+  /* MAIN CONTENT WRAPPER */
+  .content-section {
+    margin: 20px auto;
+    padding: 12px;
+  }
+
+  /* HEADINGS */
+  .content-section p[style*="font-size: 32px"] {
+    font-size: 24px !important;
+  }
+
+  .content-section p[style*="font-size: 24px"] {
+    font-size: 20px !important;
+  }
+
+  .content-section p[style*="font-size: 16px"],
+  .content-section p[style*="font-size: 18px"] {
+    font-size: 15px !important;
+    line-height: 1.6;
+  }
+
+  /* DIVIDERS */
+  .content-section span[style*="width: 300px"] {
+    width: 100px !important;
+  }
+
+  /* LISTINGS GRID → SINGLE COLUMN */
+  #listings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .listing-card {
+    padding: 12px;
+  }
+
+  .listing-card img {
+    height: 160px;
+  }
+
+  .listing-card h3 {
+    font-size: 1rem;
+  }
+
+  .details,
+  .listing-card .meta {
+    font-size: 0.85rem;
+  }
+
+  .listing-card .btn {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* PAGINATION */
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pagination button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  /* CONTACT SECTIONS */
+  .contact-info p {
+    text-align: center;
+  }
+
+  /* JOTFORM */
+  .calendar-container {
+    padding: 10px;
+  }
+
+  .calendar-container iframe {
+    height: 620px;
+  }
+
+  /* FOOTER */
+  .footer {
+    font-size: 0.8rem;
+    padding: 12px;
+  }
+}
+
 
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/Peters%20Group.PNG" alt="Peters Group Logo" />
-    </div>
-
-    <nav class="nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-
-        <li class="dropdown">
-          <a href="javascript:void(0)" class="dropdown-toggle">Rentals</a>
-          <div class="dropdown-menu rentals-menu">
-            <a href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1" target="_blank" class="dropdown-item with-icon">
-              <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/RentRedi.png" alt="RentRedi Logo" />
-              <span>RentRedi</span>
-            </a>
-            <a href="https://www.padsplit.com/listing/14427" target="_blank" class="dropdown-item with-icon">
-              <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Logos/PadSplit.png" alt="PadSplit Logo" />
-              <span>PadSplit</span>
-            </a>
-          </div>
-        </li>
-
-        <li><a href="#about">About</a></li>
-        <li><a href="CalendarMobile.html">House Tours</a></li>
-
-        <li class="dropdown">
-          <a href="javascript:void(0)" class="dropdown-toggle">Reviews</a>
-          <div class="dropdown-menu">
-            <a href="AdamMobile.html">Adam Peters</a>
-            <a href="AshleyMobile.html">Ashley Peters</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- SLIDESHOW -->
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="Images/MC.png" alt="Home 1" />
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/2.png" alt="Home 2" />
-      <a
-        href="https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1"
-        target="_blank"
-        class="slide-button"
-      >
-        View Properties for Rent
-      </a>
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/3.png" alt="Home 3" />
-      <a
-        href="https://www.padsplit.com/listing/14427"
-        target="_blank"
-        class="slide-button"
-      >
-        Book on PadSplit
-      </a>
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://raw.githubusercontent.com/michaellouis-cyberbacker/PetersGroup/refs/heads/main/Homes/4.png" alt="Home 4" />
-    </div>
-
-    <!-- NAV BUTTONS -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  <!-- HERO LOGO -->
+  <div class="hero-logo">
+    <img src="Logos/Main.png" alt="Ella Valley Homes Logo">
   </div>
 
-  <div class="dot-container">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
+  <!-- CONTENT -->
+  <section class="content-section">
 
-  <!-- FOOTER -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <p style="font-family: 'Lora', serif; font-size: 32px; font-weight: 700;">
+      WALKING YOU HOME
+    </p>
+    <p style="font-family: 'Lora', serif; font-size: 16px; font-weight: 700;">
+      At <span style="color: #c6a25a;">Ella Valley Homes</span>, we believe a house is more than just four walls and a roof,
+      it’s the backdrop to your life’s most meaningful moments.
+    </p>
+
+    <div style="text-align: center; margin: 40px 0;">
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+      <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+    </div>
+
+    <p style="font-family: 'Lora', serif; font-size: 24px; font-weight: 700;">
+      Properties for Rent
+    </p>
+
+    <div id="listings-grid"></div>
+    <div id="pagination" class="pagination"></div>
+
+    <div style="text-align: center; margin: 40px 0;">
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+      <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+    </div>
+
+    <div class="contact-info" style="margin-bottom: 50px; color: #0d1b2a; font-family: 'Lora', serif;">
+      <p style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">Contact Us</p>
+      <p style="font-size: 16px; font-weight: 700; margin: 5px 0;">Ashley Peters</p>
+      <p style="font-size: 14px; margin: 5px 0;">
+        <a href="mailto:ashley@ellavalleyhomes.com" style="color: #0d1b2a; text-decoration: none;">ashley@ellavalleyhomes.com</a>
+      </p>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0;">
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+      <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+    </div>
+
+    <div class="contact-info" style="margin-bottom: 50px; color: #0d1b2a; font-family: 'Lora', serif;">
+      <p style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">Request a House Tour</p>
+
+      <div class="calendar-container">
+        <iframe
+          src="https://form.jotform.com/260066429041451"
+          style="width:100%; height:540px; border:none;">
+        </iframe>
+      </div>
+    </div>
+
+  </section>
+
   <footer class="footer">
     <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
+  <!-- LISTINGS SCRIPT (ONLY LISTINGS UPDATED) -->
   <script>
-    document.querySelectorAll(".dropdown-toggle").forEach(tog => {
-      tog.addEventListener("click", (e) => {
-        e.preventDefault();
-        tog.parentElement.classList.toggle("open");
+    const PAGE_SIZE = 5;
+    let currentPage = 1;
+    let listingsData = [];
+
+    function renderListings() {
+      const grid = document.getElementById('listings-grid');
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+      const pageItems = listingsData.slice(start, end);
+
+      grid.innerHTML = pageItems.map(x => `
+        <article class="listing-card">
+          <span class="status-badge status-${x.status.replaceAll(" ", "-")}">
+            ${x.status}
+          </span>
+
+          <img src="${x.image}" alt="${x.title}">
+          <h3>${x.title}</h3>
+          <p class="meta">${x.location}</p>
+
+          <div class="details">
+            ${x.bedrooms} bd • ${x.bathrooms} ba • ${x.lot_size} sq ft
+          </div>
+
+          <p class="price">${x.price}</p>
+
+          ${
+            (x.status === "Available" || x.status === "Coming Soon") && x.external_url
+              ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">Apply Now</a>`
+              : x.status === "Under Contract"
+                ? `<span class="btn disabled">Under Contract</span>`
+                : ``
+          }
+        </article>
+      `).join('') || `<p>No listings found.</p>`;
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      const totalPages = Math.ceil(listingsData.length / PAGE_SIZE);
+
+      if (totalPages <= 1) {
+        pagination.innerHTML = "";
+        return;
+      }
+
+      pagination.innerHTML = `
+        <button ${currentPage === 1 ? "disabled" : ""} onclick="changePage(${currentPage - 1})">Prev</button>
+        <span>Page ${currentPage} of ${totalPages}</span>
+        <button ${currentPage === totalPages ? "disabled" : ""} onclick="changePage(${currentPage + 1})">Next</button>
+      `;
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      renderListings();
+    }
+
+    fetch('/data/listings.json')
+      .then(r => r.json())
+      .then(({ listings }) => {
+        listingsData = listings || [];
+        renderListings();
+      })
+      .catch(() => {
+        document.getElementById('listings-grid').innerHTML =
+          `<p>Listings failed to load.</p>`;
       });
-    });
-
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-
-    function showSlides(n) {
-      const slides = document.getElementsByClassName("mySlides");
-      const dots = document.getElementsByClassName("dot");
-
-      if (n > slides.length) slideIndex = 1;
-      if (n < 1) slideIndex = slides.length;
-
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
-    }
-
-    setInterval(() => plusSlides(1), 5000);
   </script>
 
 </body>
