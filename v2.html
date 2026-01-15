@@ -114,35 +114,6 @@
       font-weight: 600;
     }
 	
-	/* STATUS BADGE */
-.status-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 4px 10px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  border-radius: 999px;
-  text-transform: uppercase;
-  color: #111;
-}
-
-.status-Available { background: #4ade80; }
-.status-Coming-Soon { background: #60a5fa; }
-.status-Under-Contract { background: #c6a25a; }
-.status-Sold { background: #f87171; }
-
-.details {
-  font-size: 0.85rem;
-  color: #555;
-  margin: 4px 0 6px;
-}
-
-.btn.disabled {
-  opacity: 0.45;
-  pointer-events: none;
-}
-
 
     /* PAGINATION */
     .pagination {
@@ -277,32 +248,17 @@
       const end = start + PAGE_SIZE;
       const pageItems = listingsData.slice(start, end);
 
-grid.innerHTML = pageItems.map(x => `
-  <article class="listing-card">
-    <span class="status-badge status-${x.status.replaceAll(" ", "-")}">
-      ${x.status}
-    </span>
-
-    <img src="${x.image}" alt="${x.title}">
-    <h3>${x.title}</h3>
-    <p class="meta">${x.location}</p>
-
-    <div class="details">
-      ${x.bedrooms} bd • ${x.bathrooms} ba • ${x.lot_size} sq ft
-    </div>
-
-    <p class="price">${x.price}</p>
-
-    ${
-      (x.status === "Available" || x.status === "Coming Soon") && x.external_url
-        ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">Apply Now</a>`
-        : x.status === "Under Contract"
-          ? `<span class="btn disabled">Under Contract</span>`
-          : ``
-    }
-  </article>
-`).join('') || `<p>No listings found.</p>`;
-
+      grid.innerHTML = pageItems.map(x => `
+        <article class="listing-card">
+          <img src="${x.image}" alt="${x.title}">
+          <h3>${x.title}</h3>
+          <p class="meta">${x.location}</p>
+          <p class="price">${x.price}</p>
+          ${x.external_url
+            ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">Apply Now</a>`
+            : ``}
+        </article>
+      `).join('') || `<p>No listings found.</p>`;
 
       renderPagination();
     }
