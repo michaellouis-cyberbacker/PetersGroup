@@ -22,6 +22,9 @@
       --gold: #c6a25a;
       --navy: #0d1b2a;
       --cream: #f8f6f1;
+      --green: #4ade80;
+      --red: #f87171;
+      --blue: #60a5fa;
     }
 
     body {
@@ -75,6 +78,7 @@
       display: flex;
       flex-direction: column;
       background: #ffffff;
+      position: relative;
     }
 
     .listing-card img {
@@ -85,6 +89,24 @@
       margin-bottom: 10px;
     }
 
+    /* STATUS BADGE */
+    .status-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 999px;
+      text-transform: uppercase;
+      color: #111;
+    }
+
+    .status-Available { background: var(--green); }
+    .status-Coming-Soon { background: var(--blue); }
+    .status-Under-Contract { background: var(--gold); }
+    .status-Sold { background: var(--red); }
+
     .listing-card h3 {
       margin: 0 0 6px;
       font-size: 1.05rem;
@@ -94,6 +116,12 @@
       margin: 4px 0;
       font-size: 0.9rem;
       color: #555;
+    }
+
+    .details {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 4px 0 6px;
     }
 
     .listing-card .price {
@@ -113,7 +141,11 @@
       text-align: center;
       font-weight: 600;
     }
-	
+
+    .btn.disabled {
+      opacity: 0.45;
+      pointer-events: none;
+    }
 
     /* PAGINATION */
     .pagination {
@@ -160,7 +192,6 @@
       margin-top: 60px;
       font-size: 0.9rem;
     }
-
   </style>
 </head>
 
@@ -196,38 +227,39 @@
 
     <div id="listings-grid"></div>
     <div id="pagination" class="pagination"></div>
-	
-<div style="text-align: center; margin: 40px 0;">
-  <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
-  <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
-  <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
-</div>
 
-<div class="contact-info" style="margin-bottom: 50px; color: #0d1b2a; font-family: 'Lora', serif;">
-  <p style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">Contact Us</p>
-  <p style="font-size: 16px; font-weight: 700; margin: 5px 0;">Ashley Peters</p>
-  <p style="font-size: 14px; margin: 5px 0;">
-    <a href="tel:9137107004" style="color: #0d1b2a; text-decoration: none;">(913) 710-7004</a>
-  </p>
-  <p style="font-size: 14px; margin: 5px 0;">
-    <a href="mailto:ashley@ellavalleyhomes.com" style="color: #0d1b2a; text-decoration: none;">ashley@ellavalleyhomes.com</a>
-  </p>
-</div>
+    <div style="text-align: center; margin: 40px 0;">
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+      <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+    </div>
 
-<div style="text-align: center; margin: 40px 0;">
-  <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
-  <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
-  <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
-</div>
+    <div class="contact-info" style="margin-bottom: 50px; color: #0d1b2a; font-family: 'Lora', serif;">
+      <p style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">Contact Us</p>
+      <p style="font-size: 16px; font-weight: 700; margin: 5px 0;">Ashley Peters</p>
+      <p style="font-size: 14px; margin: 5px 0;">
+        <a href="tel:9137107004" style="color: #0d1b2a; text-decoration: none;">(913) 710-7004</a>
+      </p>
+      <p style="font-size: 14px; margin: 5px 0;">
+        <a href="mailto:ashley@ellavalleyhomes.com" style="color: #0d1b2a; text-decoration: none;">ashley@ellavalleyhomes.com</a>
+      </p>
+    </div>
 
-<div class="contact-info" style="margin-bottom: 50px; color: #0d1b2a; font-family: 'Lora', serif;">
-  <p style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">Request a House Tour</p>
+    <div style="text-align: center; margin: 40px 0;">
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+      <span style="color: #c6a25a; margin: 0 10px; font-size: 10px;">&#9830;</span>
+      <span style="display: inline-block; width: 300px; height: 1px; background: #c6a25a;"></span>
+    </div>
 
-    <div class="calendar-container">
-      <iframe
-        src="https://form.jotform.com/260066429041451"
-        style="width:100%; height:540px; border:none;">
-      </iframe>
+    <div class="contact-info" style="margin-bottom: 50px; color: #0d1b2a; font-family: 'Lora', serif;">
+      <p style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">Request a House Tour</p>
+
+      <div class="calendar-container">
+        <iframe
+          src="https://form.jotform.com/260066429041451"
+          style="width:100%; height:540px; border:none;">
+        </iframe>
+      </div>
     </div>
 
   </section>
@@ -236,7 +268,7 @@
     <p>&copy; 2025 Ella Valley Homes LLC. All rights reserved.</p>
   </footer>
 
-  <!-- LISTINGS SCRIPT (UNCHANGED LOGIC) -->
+  <!-- LISTINGS SCRIPT (ONLY LISTINGS UPDATED) -->
   <script>
     const PAGE_SIZE = 5;
     let currentPage = 1;
@@ -250,13 +282,27 @@
 
       grid.innerHTML = pageItems.map(x => `
         <article class="listing-card">
+          <span class="status-badge status-${x.status.replaceAll(" ", "-")}">
+            ${x.status}
+          </span>
+
           <img src="${x.image}" alt="${x.title}">
           <h3>${x.title}</h3>
           <p class="meta">${x.location}</p>
+
+          <div class="details">
+            ${x.bedrooms} bd • ${x.bathrooms} ba • ${x.lot_size} sq ft
+          </div>
+
           <p class="price">${x.price}</p>
-          ${x.external_url
-            ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">Apply Now</a>`
-            : ``}
+
+          ${
+            (x.status === "Available" || x.status === "Coming Soon") && x.external_url
+              ? `<a class="btn" href="${x.external_url}" target="_blank" rel="noopener">Apply Now</a>`
+              : x.status === "Under Contract"
+                ? `<span class="btn disabled">Under Contract</span>`
+                : ``
+          }
         </article>
       `).join('') || `<p>No listings found.</p>`;
 
