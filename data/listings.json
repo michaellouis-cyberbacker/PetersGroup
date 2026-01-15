@@ -20,6 +20,17 @@
       "title": "Sample",
       "image": "/assets/images/1.png",
       "external_url": "https://www.zillow.com"
+    },
+    {
+      "bathrooms": 1,
+      "price": "$1500",
+      "lot_size": 856,
+      "status": "Available",
+      "location": "5716 Park Ave, Kansas City, MO 64130",
+      "bedrooms": 3,
+      "title": "3 Bedroom 1 Bath 5716 Park Ave, Main - Section 8 Accepted",
+      "image": "/assets/images/5716.jpg",
+      "external_url": "https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1/-OgCpNQPpPRjkE9Vzi_X/Main"
     }
   ]
 }
