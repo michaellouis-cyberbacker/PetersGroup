@@ -2,14 +2,14 @@
   "listings": [
     {
       "bathrooms": 1,
-      "price": "$1500",
-      "lot_size": 572,
+      "price": "$1400",
+      "lot_size": 900,
       "status": "Available",
-      "location": "728 S Kansas Ave, Olathe, KS 66061",
-      "bedrooms": 2,
-      "title": "2 Bedroom 1 Bath Olathe, Kansas",
-      "image": "/assets/images/img_0048.jpeg",
-      "external_url": "https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1/-Oj2Y-a9q80QgyHxx9Cl/-Oj2XjtRVand7QxenWg5"
+      "location": "3827 E 53rd Terr Kansas City, MO",
+      "bedrooms": 3,
+      "title": "3 Bedroom 1 Bath 53rd Terr Kansas City, MO",
+      "image": "/assets/images/3827.jpeg",
+      "external_url": "https://www.zillow.com/homedetails/3827-E-53rd-Ter-Kansas-City-MO-64130/2360942_zpid/?utm_campaign=zillowwebmessage&utm_medium=referral&utm_source=txtshare"
     },
     {
       "bathrooms": 1,
@@ -21,6 +21,17 @@
       "title": "3 Bedroom 1 Bath 5716 Park Ave, Main - Section 8 Accepted",
       "image": "/assets/images/5716.jpg",
       "external_url": "https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1/-OgCpNQPpPRjkE9Vzi_X/Main"
+    },
+    {
+      "bathrooms": 1,
+      "price": "$1500",
+      "lot_size": 572,
+      "status": "Sold",
+      "location": "728 S Kansas Ave, Olathe, KS 66061",
+      "bedrooms": 2,
+      "title": "2 Bedroom 1 Bath Olathe, Kansas",
+      "image": "/assets/images/img_0048.jpeg",
+      "external_url": "https://app.rentredi.com/listingDetails/NuczMAXbb3W1sZxAnSCsGehPcXx1/-Oj2Y-a9q80QgyHxx9Cl/-Oj2XjtRVand7QxenWg5"
     },
     {
       "bathrooms": 2,
