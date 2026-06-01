@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELLA VALLEY DASHBOARD</title>
     <style>
-	
-		/* Hide content by default until passcode is verified */
-		#protected-content {
-			display: none;
-			flex-direction: column;
-			height: 100%;
-		}
-		
         /* Reset and basic styling */
         body, html {
             margin: 0;
@@ -86,8 +78,6 @@
 </head>
 <body>
 
-	<div id="protected-content">
-
     <header>
         <h1>DASHBOARD</h1>
     </header>
@@ -97,25 +87,6 @@
             <iframe src="https://datastudio.google.com/embed/reporting/5c6c21f5-26f3-4878-a432-30d4a19984c7/page/8yjzF" allowfullscreen></iframe>
             </div>
     </div>
-	
-	</div>
-	
-	<script>
-    function checkPasscode() {
-        const passcode = "2026";
-        const userInput = prompt("Please enter the passcode to view the dashboard:");
-
-        if (userInput === passcode) {
-            document.getElementById("protected-content").style.display = "flex";
-        } else {
-            alert("Incorrect passcode. Access denied.");
-            window.location.reload();
-        }
-    }
-
-    // Run the check when the page loads
-    window.onload = checkPasscode;
-	</script>
 
 </body>
 </html>
